@@ -1,3 +1,5 @@
+[中文](README.md) | [English](README.en.md)
+
 # finesse-skill
 
 > **绝不廉价的高级界面 —— 品牌惊艳 + 产品精密**
