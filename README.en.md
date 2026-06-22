@@ -1,5 +1,7 @@
 [中文](README.md) | [English](README.en.md)
 
+![finesse-skill cover](assets/cover.jpg)
+
 # finesse-skill
 
 > **Never-cheap, high-craft web interfaces — brand spectacle + product precision**
