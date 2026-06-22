@@ -89,10 +89,14 @@ const RULES = [
   {
     id: 'em-dash',
     severity: 'P2',
-    label: 'Em-dash / "--" used as a flourish in copy',
+    label: 'Em-dash / "--" as a prose flourish (kinetic pause / dramatic aside)',
     fix: 'clarify',
-    // em-dash between word chars; scan comment-stripped copy so notes/CSS don't fire.
-    find: (t) => matches(stripComments(t), /\w\s*—\s*\w|\w\s--\s\w/g),
+    // Only flag the real tell: an em-dash between two lowercase prose words
+    // ("workflow — seamlessly"). Skip structured labels where it's a legitimate
+    // separator: number—label ("001 — ENGINE"), CAPS—CAPS ("NEXT — ISSUE 08"),
+    // role—name bylines, and CJK labels. Also catch literal " -- " in prose.
+    // Scan comment-stripped copy so notes/CSS don't fire.
+    find: (t) => matches(stripComments(t), /[a-z]{2,}\s*—\s*[a-z]{2,}|[a-z]{2,}\s--\s[a-z]{2,}/g),
   },
   {
     id: 'numbered-scaffold',
