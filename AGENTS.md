@@ -16,6 +16,25 @@ Both share the same premium substrate and anti-slop blacklist. Neither is allowe
 
 ---
 
+## Commands (targeted iteration)
+
+A full build runs the whole workflow below. For iterating on an existing page, route the request through one verb instead of rebuilding — Codex has no slash commands, so map the user's intent to the verb and load only that reference.
+
+| Verb | Intent it matches | Load |
+|------|-------------------|------|
+| `craft` | "build me a landing page / dashboard" (default) | full workflow |
+| `audit` | "is this any good?", "review it" — **read-only**, never edits | `references/audit.md` (runs `scripts/detect.mjs`) |
+| `bolder` | "too plain / boring" → SPECTACLE +2, engine up a tier | `references/hero-engines.md` |
+| `quieter` | "too flashy / janky" → SPECTACLE −2, engine down a tier | `references/hero-engines.md` |
+| `soul` | "feels generic / wrong vibe" → re-pick persona, re-lock color | `references/style-personas.md` |
+| `animate` | "make it move / different animation" → add/swap engine only | `references/hero-engines.md` |
+| `densify` | "too sparse / too dense" → DENSITY ± | `references/product-ui.md` |
+| `redesign` | "improve / fix this page" → audit-first, never full-rebuild | `references/redesign-mode.md` |
+
+For a single complaint, change **one** thing, keep the substrate and soul, then re-run the relevant pre-flight gates.
+
+---
+
 ## Mandatory workflow (execute in order)
 
 ### 1. Design Read — before any code
@@ -57,7 +76,13 @@ Non-negotiables — see `skills/finesse-ui/references/design-dna.md` for exact v
 - Skip soul personas and hero engines
 
 ### 5. Run the cheapness blacklist
-Scan before shipping. Hard bans:
+Run the local detector first (no network, pure file scan), then add your own eye:
+
+```
+node skills/finesse-ui/scripts/detect.mjs --json <target ...>
+```
+
+It reports findings P0/P1/P2 with `file:line` and exits non-zero on any P0 (e.g. SPECTACLE claimed but no engine found, missing reduced-motion fallback). Then check the taste-level offenders by hand. Hard bans:
 - Em-dashes in copy as a flourish (most-violated AI tell — zero exceptions)
 - Gradient text, default glassmorphism, AI-purple glow, side-stripe card borders
 - Eyebrow label on every section; numbered `01 · 02 · 03` section markers
@@ -67,10 +92,10 @@ Scan before shipping. Hard bans:
 - Zero imagery on image-implied briefs
 
 ### 6. Pre-flight before declaring done
-See `skills/finesse-ui/references/preflight.md`. Mandatory gates:
+See `skills/finesse-ui/references/preflight.md`. Run `node skills/finesse-ui/scripts/detect.mjs --json <target>` (must exit 0), and when a browser is available, open the page and screenshot the hero to confirm the engine renders real pixels (not a white/flat screen). Mandatory gates:
 - [ ] Design Read output + dials documented
 - [ ] Substrate applied (grain, vignette, type tension, color lock)
-- [ ] SPECTACLE claimed = SPECTACLE shipped
+- [ ] SPECTACLE claimed = SPECTACLE shipped (detector + browser-verified, not just asserted)
 - [ ] Cheapness blacklist cleared
 - [ ] `prefers-reduced-motion` handled on every animation
 - [ ] WCAG AA contrast: body ≥ 4.5:1, large text ≥ 3:1
@@ -89,9 +114,12 @@ If any gate fails: fix it. Do not ship and note it as a known issue.
 | `skills/finesse-ui/references/hero-engines.md` | Building a brand hero engine |
 | `skills/finesse-ui/references/style-personas.md` | Choosing a brand soul/persona |
 | `skills/finesse-ui/references/anti-cheap.md` | Running the cheapness audit |
+| `skills/finesse-ui/references/audit.md` | Read-only diagnostic (cheapness + spectacle + pre-flight) |
 | `skills/finesse-ui/references/product-ui.md` | Product register: dashboards, tables, charts |
 | `skills/finesse-ui/references/preflight.md` | Pre-flight checklist |
+| `skills/finesse-ui/references/redesign-mode.md` | Upgrading an existing page, audit-first |
 | `skills/finesse-ui/references/design-model.md` | Multi-page token consistency |
+| `skills/finesse-ui/scripts/detect.mjs` | Local slop + spectacle detector (run in audit / pre-flight) |
 
 ---
 

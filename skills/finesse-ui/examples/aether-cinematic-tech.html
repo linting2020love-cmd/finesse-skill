@@ -57,6 +57,12 @@
   .marquee .track span b { color: var(--cyan); font-weight: 500; margin-right: 56px; }
   @keyframes scroll { to { transform: translateX(-50%); } }
 
+  /* ── reduced-motion fallback: freeze infinite CSS loops ── */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll span { animation: none; opacity: .55; }
+    .marquee .track { animation: none; }
+  }
+
   /* ── MANIFESTO ── */
   .manifesto { padding: 180px 52px; max-width: 1180px; margin: 0 auto;
     background: linear-gradient(180deg, rgba(5,5,7,.40), rgba(5,5,7,.86) 40%, rgba(5,5,7,.86)); }
@@ -324,7 +330,8 @@ function tick() {
   blob.scale.setScalar(2.0 - sink * 0.25);
   lightGroup.rotation.y = t * 0.3;
   composer.render();
-  requestAnimationFrame(tick);
+  // reduced-motion: render one composed still frame, then stop the loop.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) requestAnimationFrame(tick);
 }
 tick();
 </script>

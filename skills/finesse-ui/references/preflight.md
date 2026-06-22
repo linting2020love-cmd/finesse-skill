@@ -29,6 +29,21 @@ Run before saying "done." Merges the substrate check, the cheapness scan, the sp
 - [ ] **`prefers-reduced-motion`** freezes the engine to a still frame / static hero.
 - [ ] **Motivated motion** — every animation has a one-sentence reason. ≤1 marquee.
 
+### Verifying spectacle — don't trust your own claim, prove it
+
+A page that *claims* SPECTACLE 8 but ships a white hero is broken, not plain. Verify in two passes:
+
+1. **Static (always):** run the detector — it greps for a real engine and the reduced-motion fallback, and fails on "claimed-not-shown":
+   ```bash
+   node skills/finesse-ui/scripts/detect.mjs --json <target>
+   ```
+   A `P0 spectacle-not-shown` or `P0 no-reduced-motion` here is a hard fail.
+2. **Runtime (when a browser is available):** the grep only proves the *code* exists, not that it *renders*. Open the page and confirm real pixels:
+   - Use the Playwright MCP tools (`browser_navigate` → `browser_take_screenshot`) to load the page and screenshot the hero.
+   - Confirm the engine drew something — **not** a white screen, not a flat background-color fill. If the hero is blank, the engine errored; check `browser_console_messages` for the throw.
+   - Reload with reduced motion (emulate `prefers-reduced-motion: reduce`) and confirm a composed static frame still shows — never a blank or frozen-mid-animation hero.
+   - If you cannot run a browser in this environment, say so explicitly and fall back to the static pass; don't silently claim runtime verification you didn't do.
+
 ## D. Layout Discipline (hard)
 
 - [ ] **Hero fits the viewport** — headline ≤2 lines, subtext ≤20 words, CTA visible without scroll. Max 4 text elements.

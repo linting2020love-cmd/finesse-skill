@@ -3,3 +3,6 @@ node_modules/
 *.log
 .env
 .env.*
+
+# 本地优化 backlog,不提交
+OPTIMIZATION.md

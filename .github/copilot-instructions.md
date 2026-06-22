@@ -12,7 +12,7 @@ Both are **never cheap**. The premium substrate and anti-slop rules apply to bot
 
 ## The 8 Non-Negotiables
 
-1. **Read the brief first.** Before any code, output one line: `Design Read: {industry} · {soul} · register={brand|product} · SPECTACLE={n}`. Name the lazy default aesthetic and state how you are beating it.
+1. **Read the brief first.** Before any code, output one line: `Design Read: {industry} · {soul} · register={brand|product} · SPECTACLE={n}`. Name the lazy default aesthetic and state how you are beating it — at **two altitudes**: the category default ("coffee → beige+brass") *and* the obvious anti-reference ("AI tool that's not SaaS-cream → editorial-typographic"). Avoiding the first reflex but landing on the second is still slop.
 
 2. **Premium substrate on every page.** SVG grain layer (`feTurbulence`, `opacity .025–.05`). Radial vignette on dark heroes. Display headings with negative tracking (`-.02 to -.045em`) and `line-height .86–.95`. Translucent borders, never `rgba(0,0,0,1)` lines. No pure `#fff`/`#000`.
 
@@ -36,6 +36,10 @@ Both are **never cheap**. The premium substrate and anti-slop rules apply to bot
 - Fake-precise numbers (`92%`, `4.1×`) without a real source
 - Default-category palettes (beige+brass for craft, purple-glow for AI/SaaS) reached for without reason
 
+## Iterating on an existing page
+
+Don't rebuild for a single complaint — route to one verb and adjust only that: `audit` (read-only review), `bolder` / `quieter` (SPECTACLE ±), `soul` (re-pick persona), `animate` (engine only), `densify` (DENSITY ±), `redesign` (audit-first fix). See `skills/finesse-ui/SKILL.md` → Commands.
+
 ## Reference Material
 
-The full skill lives in `skills/finesse-ui/SKILL.md`. Deep material in `skills/finesse-ui/references/`. Load what you need per phase.
+The full skill lives in `skills/finesse-ui/SKILL.md`. Deep material in `skills/finesse-ui/references/` (incl. `audit.md` for read-only diagnostics). Load what you need per phase. Inside the finesse repo, `node skills/finesse-ui/scripts/detect.mjs --json <target>` scans for slop and spectacle-claimed-not-shown.

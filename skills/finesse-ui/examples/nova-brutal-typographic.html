@@ -47,6 +47,11 @@
   .mq .t span i { font-style: normal; opacity: .55; }
   @keyframes mq { to { transform: translateX(-50%); } }
 
+  /* ── reduced-motion fallback ── */
+  @media (prefers-reduced-motion: reduce) {
+    .mq .t { animation: none; }
+  }
+
   /* STATEMENT (scrub) */
   .stmt { padding: 200px 40px; }
   .stmt p { font-family: 'Anton', sans-serif; font-size: clamp(38px, 6.4vw, 104px); line-height: 1.02;
@@ -154,6 +159,10 @@
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
+// reduced-motion: skip all scroll-driven motion. Content is visible by default
+// (.ftxt / .y default to opacity 1; #stmt keeps its plain text), so skipping is safe.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+
 // hero 图视差
 gsap.to('#heroImg', { yPercent: -16, ease: 'none',
   scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
@@ -204,6 +213,8 @@ gsap.fromTo('.feature .ftxt', { letterSpacing: '0.3em', opacity: 0 }, { letterSp
 // finale 年份
 gsap.from('.finale .y', { scale: 1.3, opacity: 0, duration: 1, ease: 'power3.out',
   scrollTrigger: { trigger: '.finale', start: 'top 70%' } });
+
+} // end reduced-motion guard
 </script>
 </body>
 </html>

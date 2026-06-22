@@ -14,6 +14,22 @@ alwaysApply: false
 
 ---
 
+## COMMANDS — targeted iteration (don't rebuild for one complaint)
+
+A full build runs STEP 0–8. To iterate on an existing page, map the request to one verb and adjust only that — keep the substrate (STEP 3) and soul intact, then re-run the relevant pre-flight gates.
+
+| Verb | Intent it matches | Focus |
+|------|-------------------|-------|
+| `audit` | "is this any good? / review it" — **read-only**, never edits | run the blacklist + spectacle-shown + pre-flight, report findings |
+| `bolder` | "too plain / boring" | SPECTACLE +2, engine up a tier (CSS → GSAP → Canvas → Three.js) |
+| `quieter` | "too flashy / janky" | SPECTACLE −2, engine down a tier |
+| `soul` | "feels generic / wrong vibe" | re-pick persona (STEP 2), re-lock the accent |
+| `animate` | "make it move / different animation" | add/swap the engine only, motion alone |
+| `densify` | "too sparse / too dense" | DENSITY ± — add/remove content |
+| `redesign` | "improve / fix this page" | audit-first; change the responsible module, not the whole page |
+
+---
+
 ## STEP 0 — BRAND READ (Before Any Code)
 
 Most AI design output is bad because the model jumps to a default aesthetic. Don't.
@@ -25,7 +41,9 @@ Most AI design output is bad because the model jumps to a default aesthetic. Don
 **Output a one-line Design Read before generating:**
 `Design Read: {industry} · {soul in 2-3 words} · register={brand|product} · SPECTACLE={n} · hero-engine={type}`
 
-**Anti-Default Discipline:** Name the lazy default for this brief, then beat it. "Coffee brand → the default is warm-beige + brass serif. I'm rejecting that for {x}."
+**Anti-Default Discipline (two altitudes):** Name the lazy default, then beat it — and check the *second* reflex too.
+- **First-order:** could someone guess theme+palette from the category alone? "Coffee → warm-beige + brass serif." Reject it.
+- **Second-order:** could they guess it from category + your anti-reference? "AI tool that's *not* SaaS-cream → editorial-typographic." "Fintech *not* navy-gold → terminal dark mode." Avoiding the first default and landing on the obvious alternative is just slop one tier up. Rework until both are non-obvious.
 
 ---
 
@@ -114,7 +132,7 @@ INDUSTRY SECTION → CTA/FINALE (oversized type) → FOOTER (mono, hairline)
 
 ## STEP 6 — CHEAPNESS BLACKLIST (both registers)
 
-Scan before shipping. Headline offenders:
+Scan before shipping. *(If working inside the finesse repo, `node skills/finesse-ui/scripts/detect.mjs --json <target>` automates most of this and flags spectacle-claimed-not-shown; otherwise scan by hand.)* Headline offenders:
 
 - **Em-dashes** in copy as a flourish — banned outright. #1 most-violated AI tell.
 - **Gradient text**, default glassmorphism, side-stripe card borders, AI-purple glow.
@@ -143,7 +161,7 @@ Scan before shipping. Headline offenders:
 Check all of:
 - [ ] Design Read output with committed register + dials
 - [ ] Premium substrate applied (grain, vignette, type tension, translucent borders, color lock)
-- [ ] SPECTACLE claimed = SPECTACLE shipped (working engine if ≥7)
+- [ ] SPECTACLE claimed = SPECTACLE shipped (working engine if ≥7) — verify in a browser if available: open the page, confirm the hero renders real pixels, not a white/flat screen
 - [ ] Cheapness blacklist cleared (em-dashes, gradient text, eyebrow spam, fake numbers)
 - [ ] `prefers-reduced-motion` handled
 - [ ] WCAG AA contrast verified

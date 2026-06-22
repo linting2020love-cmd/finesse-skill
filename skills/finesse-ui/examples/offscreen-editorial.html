@@ -16,6 +16,12 @@
   .rule { height: 1px; background: var(--ink); }
   .reveal { opacity: 0; transform: translateY(34px); }
 
+  /* ── reduced-motion fallback: content is gated on a JS reveal, so it MUST be
+     made visible here, else reduced-motion / headless renders ship blank ── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+  }
+
   /* top folio bar */
   .folio { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: var(--paper);
     border-bottom: 1px solid var(--ink); display: grid; grid-template-columns: 1fr 1fr 1fr;
@@ -160,13 +166,18 @@
 <script src="./lib/ScrollTrigger.min.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray('.reveal').forEach((el) => {
-  gsap.to(el, { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out',
-    scrollTrigger: { trigger: el, start: 'top 86%' } });
-});
-// 全幅图视差
-gsap.to('#plateImg', { yPercent: -14, ease: 'none',
-  scrollTrigger: { trigger: '.plate', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+// reduced-motion: skip reveals & parallax. The CSS fallback above already makes
+// .reveal visible, so content is never gated on this script under reduced motion.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  gsap.utils.toArray('.reveal').forEach((el) => {
+    gsap.to(el, { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 86%' } });
+  });
+  // 全幅图视差
+  gsap.to('#plateImg', { yPercent: -14, ease: 'none',
+    scrollTrigger: { trigger: '.plate', start: 'top bottom', end: 'bottom top', scrub: true } });
+}
 </script>
 </body>
 </html>

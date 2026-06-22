@@ -1,7 +1,9 @@
 ---
 name: finesse-ui
-description: Build never-cheap, high-craft web interfaces — both brand surfaces (landing pages, brand sites, launches, portfolios, hero pages with real WebGL/Three.js/Canvas/GSAP engines) and product UI (dashboards, admin panels, analytics, data tables, app shells, settings). Routes by register: brand → soul + spectacle engine; product → component system + information density + data viz. Always reads the brief first and audits against an anti-slop cheapness blacklist. Triggers on "make this look premium", "landing page", "dashboard", "admin panel", "analytics UI", "data table", "app UI", "give it a soul / a vibe", "anti-slop", "hero animation", "/finesse".
-version: 0.1.0
+description: Build never-cheap, high-craft web interfaces — both brand surfaces (landing pages, brand sites, launches, portfolios, hero pages with real WebGL/Three.js/Canvas/GSAP engines) and product UI (dashboards, admin panels, analytics, data tables, app shells, settings). Routes by register: brand → soul + spectacle engine; product → component system + information density + data viz. Always reads the brief first and audits against an anti-slop cheapness blacklist. Supports verb commands (audit · bolder · quieter · soul · animate · densify · redesign) for targeted iteration on existing pages. Triggers on "make this look premium", "landing page", "dashboard", "admin panel", "analytics UI", "data table", "app UI", "give it a soul / a vibe", "anti-slop", "hero animation", "/finesse".
+version: 0.2.0
+user-invocable: true
+argument-hint: "[craft · audit · bolder|quieter|soul · animate|densify · redesign] [target]"
 license: MIT
 ---
 
@@ -40,6 +42,35 @@ The `references/*.md` files are the deep material. Load the one you need for the
 | `preflight.md` | Final checklist before saying "done" |
 | `design-model.md` | Multi-page projects — token consistency |
 | `redesign-mode.md` | Upgrading an existing page — audit-first protocol |
+| `audit.md` | Read-only diagnostic — cheapness + spectacle + preflight scan |
+
+---
+
+## Commands
+
+finesse runs as a full build by default, but supports **verb commands** for targeted iteration on an existing page — so you don't re-run the whole Brand Read for a single complaint. Each command loads one reference and does one job.
+
+| Command | Category | Does | Reference |
+|---------|----------|------|-----------|
+| `craft [brief]` | Build | The full flow: Brand Read → Dials → substrate → engine → assemble (the default) | all |
+| `audit [target]` | Evaluate | **Read-only** diagnostic: run the cheapness blacklist + spectacle-shown + pre-flight, output a findings list. **Changes nothing.** | `audit.md` |
+| `bolder [target]` | Refine | Raise SPECTACLE +2, upgrade the engine (e.g. Canvas → Three.js) | `hero-engines.md` |
+| `quieter [target]` | Refine | Lower SPECTACLE −2, step down to GSAP / CSS-only; calm an overloaded page | `hero-engines.md` |
+| `soul [target]` | Refine | Re-pick the persona / soul when a page "feels generic" or wrong-vibe | `style-personas.md` |
+| `animate [target]` | Enhance | Add or swap the hero engine in isolation; motion only | `hero-engines.md` |
+| `densify [target]` | Enhance | Adjust DENSITY ± — add/remove content, tune information-per-viewport | `product-ui.md` |
+| `redesign [target]` | Iterate | Upgrade an existing page, audit-first; never full-rebuild for one complaint | `redesign-mode.md` |
+
+### Routing rules
+
+1. **First word matches a command** → load that command's reference and follow it. Everything after the command name is the target. Lay the **§3 substrate** and run the relevant **§6/§8 checks**, but skip the parts of §0–§5 that don't apply to that single action (e.g. `quieter` doesn't re-pick a soul).
+2. **First word doesn't match, but intent clearly maps to one command** ("too plain / boring" → `bolder`; "too flashy" → `quieter`; "feels generic" → `soul`; "make it pop" → `animate`; "too sparse / too dense" → `densify`; "improve / fix this page" → `redesign`) → route to that command and proceed as if invoked. If two fit, ask once which.
+3. **No command, building something new** → run the full `craft` flow (§0 → §8). This is the default for "build me a landing page / dashboard".
+4. **`audit` is read-only.** It only reports findings; it never edits code. Every other command is allowed to modify the target.
+
+> Auto-trigger is unchanged: finesse still activates from natural language via its `description`. Commands are an **added** precision entry-point (`/finesse quieter page.html`), not a replacement — both routes lead to the same references.
+
+After any command that modified the page, run the relevant **§8 Pre-Flight** gates before declaring done.
 
 ---
 
@@ -222,22 +253,23 @@ Run the full checklist in `references/preflight.md` before saying "done." It mer
 
 ## 8.A POST-DELIVERY ITERATION GUIDE
 
-After the user receives the initial output, map their feedback to the correct targeted fix. **Never rebuild from scratch for a single complaint** — identify the dial or module responsible and adjust only that.
+After the user receives the initial output, map their feedback to the correct targeted fix. **Never rebuild from scratch for a single complaint** — identify the dial or module responsible and adjust only that. The **Command** column is the verb to route through (see `## Commands`); if the user typed the command, you're already there.
 
-| User says | Action |
-|-----------|--------|
-| "too plain / boring" | Raise SPECTACLE +2; consider upgrading the engine type (e.g. Canvas → Three.js) |
-| "too flashy / overwhelming" | Lower SPECTACLE −2; simplify or swap to Engine D (GSAP) or E (CSS-only) |
-| "wrong vibe / feels off" | Re-run §2 with a different persona from `references/style-personas.md` |
-| "too much whitespace" | Raise DENSITY +2; add one content section |
-| "too cluttered" | Lower DENSITY −2; cut a section, increase section padding |
-| "more personality / bolder" | Raise SOUL +2; push color commitment level up one step in `references/design-dna.md` |
-| "feels generic / like every other AI site" | Trigger §0.D anti-default: name and reject the current soul, pick a non-obvious persona |
-| "change the colors" | Re-run color strategy in `references/design-dna.md`; maintain the accent lock rule |
-| "different animation" | Swap engine type in §4; re-run `references/hero-engines.md` for that engine's skeleton |
-| "remove a section" | Remove it, then re-audit §5 layout families (ensure ≥4 families remain) |
-| "feels slow / heavy" | Lower SPECTACLE; switch to Engine E (CSS-only) or reduce particle count/FBO resolution |
-| "needs to work on mobile" | Declare mobile layout per multi-column section; `min-h-dvh`, touch targets ≥44px |
+| User says | Command | Action |
+|-----------|---------|--------|
+| "too plain / boring" | `bolder` | Raise SPECTACLE +2; consider upgrading the engine type (e.g. Canvas → Three.js) |
+| "too flashy / overwhelming" | `quieter` | Lower SPECTACLE −2; simplify or swap to Engine D (GSAP) or E (CSS-only) |
+| "wrong vibe / feels off" | `soul` | Re-run §2 with a different persona from `references/style-personas.md` |
+| "too much whitespace" | `densify` | Raise DENSITY +2; add one content section |
+| "too cluttered" | `densify` | Lower DENSITY −2; cut a section, increase section padding |
+| "more personality / bolder" | `bolder` | Raise SOUL +2; push color commitment level up one step in `references/design-dna.md` |
+| "feels generic / like every other AI site" | `soul` | Trigger §0.D anti-default: name and reject the current soul, pick a non-obvious persona |
+| "change the colors" | `soul` | Re-run color strategy in `references/design-dna.md`; maintain the accent lock rule |
+| "different animation" | `animate` | Swap engine type in §4; re-run `references/hero-engines.md` for that engine's skeleton |
+| "remove a section" | `redesign` | Remove it, then re-audit §5 layout families (ensure ≥4 families remain) |
+| "feels slow / heavy" | `quieter` | Lower SPECTACLE; switch to Engine E (CSS-only) or reduce particle count/FBO resolution |
+| "needs to work on mobile" | `redesign` | Declare mobile layout per multi-column section; `min-h-dvh`, touch targets ≥44px |
+| "is this any good? / review it" | `audit` | Read-only: run the blacklist + spectacle-shown + pre-flight, report findings |
 
 ---
 

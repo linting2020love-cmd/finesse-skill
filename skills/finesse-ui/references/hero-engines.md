@@ -1,5 +1,11 @@
 # Hero Engines — The One Spectacular Moment
 
+> **When loaded by a command** (you're iterating, not building from scratch):
+> - **`bolder`** — current SPECTACLE is too low. Raise it +2 and step the engine UP one tier (CSS-only → GSAP → Canvas → Three.js/FBO). Add the new engine; keep everything else.
+> - **`quieter`** — current SPECTACLE is too high / janky. Lower it −2 and step the engine DOWN (Three.js → GSAP → CSS-only). Simplify or remove; don't rebuild the page.
+> - **`animate`** — SPECTACLE is fine; the motion isn't. Add or swap the engine in isolation, motion only. Don't touch palette / layout / copy.
+> In all three: change **one** thing, keep the §3 substrate and the soul intact, then re-run the §1.B "spectacle shown" check and reduced-motion fallback. Full build (`craft`) reads the whole file instead.
+
 A finesse page earns its name with **one** technically-ambitious visual engine, done at 100%, usually behind or inside the hero. Pick by soul + SPECTACLE dial. Every skeleton below is vanilla-JS-first (single-file showcase pages), with notes for framework stacks.
 
 **Universal rules for every engine:**

@@ -6,6 +6,17 @@ Merged from production-tested AI tells, absolute design bans, and training-data 
 
 ---
 
+## 0. The Two-Altitude Reflex Check (run before everything)
+
+Naming the obvious default isn't enough — once you avoid the first reflex, there's a *second* reflex waiting one tier deeper. Check both altitudes:
+
+- **First-order:** could someone guess the theme + palette from the **category alone**? "Coffee → warm beige + brass serif." "AI SaaS → purple glow + Inter." If yes, it's the first training-data reflex. Rework the scene and color strategy until the answer isn't obvious from the domain.
+- **Second-order:** could someone guess the aesthetic from **category + your anti-reference**? "AI tool that's *not* SaaS-cream → editorial-typographic." "Fintech that's *not* navy-and-gold → terminal-native dark mode." "Craft brand that's *not* beige → oxblood + Cormorant." The first reflex was dodged; the second wasn't. This is the trap that catches careful work.
+
+Rework until **both** answers are non-obvious. The currently-saturated second-order lanes to earn-or-avoid: editorial-typographic (serif + cream + huge type), phosphor-terminal dark mode, brutalist-Helvetica-on-bone, AI-purple-glow. Using one is fine *if the brief truly calls for it and you can name why*; reaching for it because you rejected the first default is just slop one level up.
+
+---
+
 ## 1. Banned Outright — `[HARD BAN]` (no override, no exceptions)
 
 Failing any item below is a **shipping blocker**. Fix before delivery.
@@ -52,6 +63,9 @@ Failing any item below is a **shipping blocker**. Fix before delivery.
 
 **Content & copy**
 - **Eyebrow-cluttered, buzzword copy**; cute-but-wrong wordplay; fake-craftsman labels; mock-poetic micro-meta ("elegant nothing"). → re-read every visible string; replace anything broken/unclear/AI-cute with a plain functional sentence.
+- **Marketing-buzzword family** — `streamline · empower · supercharge · leverage · unleash · transform · seamless · world-class · enterprise-grade · next-generation · cutting-edge · game-changer · mission-critical · elevate · unlock · revolutionize`. Vague filler that describes nothing. → pick a specific noun + a verb for what the product *literally does* ("imports your Figma file" beats "seamlessly empowers your workflow").
+- **Aphoristic-cadence voice** — the recurring rhythm of "serious statement, then punchy short negation" ("It's not a tool. It's a system." / "Less noise. More signal."). One such line is a hook; three+ across the page is an AI tell. → if three or more copy blocks land on a short rebuttal-shaped sentence, rewrite them specific and declarative.
+- **Button/link labels that don't say the action** — "OK", "Submit", "Click here", "Learn more" ×5. → verb + object ("Save changes", "Delete project"); link text standalone-meaningful ("View pricing" not "here").
 - **"Jane Doe" placeholder data**, lorem ipsum left in. → realistic, specific content.
 - **Long lists / 20-row spec tables with a hairline under every row.** → group into 2–3 chunks, card-per-spec, scroll-snap pills, or "top 5 + view all."
 - **Quotes longer than 3 lines**, attribution as name-only (`— Sarah`). → ≤3 lines, name + role + company, real typographic quotes.
