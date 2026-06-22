@@ -3,7 +3,7 @@ name: finesse-ui
 description: Build never-cheap, high-craft web interfaces — both brand surfaces (landing pages, brand sites, launches, portfolios, hero pages with real WebGL/Three.js/Canvas/GSAP engines) and product UI (dashboards, admin panels, analytics, data tables, app shells, settings). Routes by register: brand → soul + spectacle engine; product → component system + information density + data viz. Always reads the brief first and audits against an anti-slop cheapness blacklist. Supports verb commands (audit · bolder · quieter · soul · animate · densify · redesign) for targeted iteration on existing pages. Triggers on "make this look premium", "landing page", "dashboard", "admin panel", "analytics UI", "data table", "app UI", "give it a soul / a vibe", "anti-slop", "hero animation", "/finesse".
 version: 0.2.0
 user-invocable: true
-argument-hint: "[craft · audit · bolder|quieter|soul · animate|densify · redesign] [target]"
+argument-hint: "[craft · audit · bolder|quieter|soul · animate|densify · redesign · init|document] [target]"
 license: MIT
 ---
 
@@ -43,6 +43,8 @@ The `references/*.md` files are the deep material. Load the one you need for the
 | `design-model.md` | Multi-page projects — token consistency |
 | `redesign-mode.md` | Upgrading an existing page — audit-first protocol |
 | `audit.md` | Read-only diagnostic — cheapness + spectacle + preflight scan |
+| `init.md` | New project — write `PRODUCT.md` (the persistent brief) |
+| `document.md` | Existing codebase — extract `design-model.yaml` from real code |
 
 ---
 
@@ -53,6 +55,8 @@ finesse runs as a full build by default, but supports **verb commands** for targ
 | Command | Category | Does | Reference |
 |---------|----------|------|-----------|
 | `craft [brief]` | Build | The full flow: Brand Read → Dials → substrate → engine → assemble (the default) | all |
+| `init` | Setup | New project: write `PRODUCT.md` (register, soul, locked dials, anti-references) — the brief every later task reads | `init.md` |
+| `document` | Setup | Existing codebase: extract the built design system into `design-model.yaml`; report drift | `document.md` |
 | `audit [target]` | Evaluate | **Read-only** diagnostic: run the cheapness blacklist + spectacle-shown + pre-flight, output a findings list. **Changes nothing.** | `audit.md` |
 | `bolder [target]` | Refine | Raise SPECTACLE +2, upgrade the engine (e.g. Canvas → Three.js) | `hero-engines.md` |
 | `quieter [target]` | Refine | Lower SPECTACLE −2, step down to GSAP / CSS-only; calm an overloaded page | `hero-engines.md` |
@@ -83,7 +87,11 @@ Most AI design output is bad because the model jumps to a default aesthetic inst
 - **brand** — design IS the product: landing page, brand site, launch, portfolio, campaign, hero page. Be bold, opinionated, spectacular. Goes the soul + hero-engine route (§2, §4).
 - **product** — design SERVES the product: dashboard, admin, analytics, data table, app shell, settings, tool. Optimize for clarity, density, usability. Goes the component-system route (`references/product-ui.md`). Still never cheap — it inherits the substrate (§3) and the cheapness blacklist (§6).
 
-If a `PRODUCT.md` exists in the project, read it first (Register, Users, Brand Personality, Anti-references, Design Principles). It overrides your guesses. If none exists and the brief is thin, see 0.C.
+**Read project memory first.** If a `PRODUCT.md` exists at the project root, read it (register, users, brand personality, locked dials, anti-references) — it **overrides your guesses**. If a `design-model.yaml` exists, read it too for the locked palette/type/substrate so this page matches existing ones. These are written by `init` / `document` (see Commands).
+
+- **No `PRODUCT.md`, multi-page or repeat project, thin brief** → offer to run `init` first (one `PRODUCT.md` keeps every later page consistent). Don't force it on a one-off page.
+- **Existing codebase, no `design-model.yaml`** → offer `document` to capture what's there before adding to it.
+- If memory exists but the new request contradicts it, surface the conflict — don't silently override the lock.
 
 ### 0.B Output a one-line "Design Read" before generating
 

@@ -23,6 +23,8 @@ A full build runs the whole workflow below. For iterating on an existing page, r
 | Verb | Intent it matches | Load |
 |------|-------------------|------|
 | `craft` | "build me a landing page / dashboard" (default) | full workflow |
+| `init` | "set up finesse / new project" → write `PRODUCT.md` brief | `references/init.md` |
+| `document` | "capture / document the design system" → extract `design-model.yaml` | `references/document.md` |
 | `audit` | "is this any good?", "review it" — **read-only**, never edits | `references/audit.md` (runs `scripts/detect.mjs`) |
 | `bolder` | "too plain / boring" → SPECTACLE +2, engine up a tier | `references/hero-engines.md` |
 | `quieter` | "too flashy / janky" → SPECTACLE −2, engine down a tier | `references/hero-engines.md` |
@@ -38,6 +40,8 @@ For a single complaint, change **one** thing, keep the substrate and soul, then 
 ## Mandatory workflow (execute in order)
 
 ### 1. Design Read — before any code
+If a `PRODUCT.md` exists at the project root, read it first — it's the locked brief (register, soul, dials, anti-references) and overrides your guesses; read `design-model.yaml` too if present (locked palette/type/substrate). Missing on a multi-page/repeat project? Offer `init` (and `document` for existing code) before generating.
+
 Read the brief. Determine the register. Output exactly one line:
 
 ```
@@ -119,6 +123,8 @@ If any gate fails: fix it. Do not ship and note it as a known issue.
 | `skills/finesse-ui/references/preflight.md` | Pre-flight checklist |
 | `skills/finesse-ui/references/redesign-mode.md` | Upgrading an existing page, audit-first |
 | `skills/finesse-ui/references/design-model.md` | Multi-page token consistency |
+| `skills/finesse-ui/references/init.md` | New project: write `PRODUCT.md` brief |
+| `skills/finesse-ui/references/document.md` | Existing code: extract `design-model.yaml` |
 | `skills/finesse-ui/scripts/detect.mjs` | Local slop + spectacle detector (run in audit / pre-flight) |
 
 ---

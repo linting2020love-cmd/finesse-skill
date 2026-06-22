@@ -20,6 +20,8 @@ A full build runs STEP 0–8. To iterate on an existing page, map the request to
 
 | Verb | Intent it matches | Focus |
 |------|-------------------|-------|
+| `init` | "new project / set up finesse" | write `PRODUCT.md` at project root — register, soul, locked dials, anti-references; every later page reads it |
+| `document` | "capture the existing design system" | extract a `design-model.yaml` (palette/type/substrate/engine) from real code; report drift |
 | `audit` | "is this any good? / review it" — **read-only**, never edits | run the blacklist + spectacle-shown + pre-flight, report findings |
 | `bolder` | "too plain / boring" | SPECTACLE +2, engine up a tier (CSS → GSAP → Canvas → Three.js) |
 | `quieter` | "too flashy / janky" | SPECTACLE −2, engine down a tier |
@@ -33,6 +35,8 @@ A full build runs STEP 0–8. To iterate on an existing page, map the request to
 ## STEP 0 — BRAND READ (Before Any Code)
 
 Most AI design output is bad because the model jumps to a default aesthetic. Don't.
+
+**Read project memory first.** If `PRODUCT.md` (the locked brief) or `design-model.yaml` (locked palette/type/substrate) exist at the project root, read them — they override your guesses and keep this page consistent with the rest. Missing on a multi-page project? Run `init` (and `document` for existing code) first.
 
 **Determine the register:**
 - **brand** — landing page, brand site, launch, portfolio, campaign, hero page. Bold, opinionated, spectacular.
