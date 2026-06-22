@@ -33,10 +33,16 @@ Both paths share the same foundation: **premium physical substrate + anti-slop a
 
 ## Installation & Tool Support
 
-### Claude Code (native)
+### npx skills (recommended · one command for Claude Code / Codex / Cursor, etc.)
+
+[`npx skills`](https://github.com/vercel-labs/skills) is Vercel Labs' open-source cross-tool skill installer; it asks which agent to install into at runtime.
 
 ```bash
-npx skills add https://github.com/<your-username>/finesse-skill
+# Install all skills
+npx skills add https://github.com/mouse-lin/finesse-skill
+
+# Install a single skill
+npx skills add https://github.com/mouse-lin/finesse-skill --skill "finesse-ui"
 ```
 
 After installation, say "use finesse to build a …" or `/finesse` in the conversation to trigger the skill.

@@ -33,10 +33,16 @@
 
 ## 安装 & 工具支持
 
-### Claude Code（原生）
+### npx skills（推荐 · 一条命令通用于 Claude Code / Codex / Cursor 等）
+
+[`npx skills`](https://github.com/vercel-labs/skills) 是 Vercel Labs 出的开源跨工具 skill 安装器，运行时会让你选择装到哪个 agent。
 
 ```bash
-npx skills add https://github.com/<your-username>/finesse-skill
+# 安装全部 skill
+npx skills add https://github.com/mouse-lin/finesse-skill
+
+# 只安装某个 skill
+npx skills add https://github.com/mouse-lin/finesse-skill --skill "finesse-ui"
 ```
 
 安装后在对话里说"用 finesse 做一个 …"或 `/finesse` 即可触发。

@@ -6,6 +6,11 @@
   "author": {
     "name": "西瓜同学"
   },
+  "homepage": "https://github.com/mouse-lin/finesse-skill",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mouse-lin/finesse-skill.git"
+  },
   "license": "MIT",
   "category": "design",
   "keywords": ["design", "frontend", "landing-page", "webgl", "three.js", "gsap", "canvas", "anti-slop", "showcase", "hero"],
