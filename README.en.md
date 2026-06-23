@@ -35,6 +35,16 @@ Both paths share the same foundation: **premium physical substrate + anti-slop a
 - **Design-model token lock** — multi-page consistency + generate → self-audit → iterate loop
 - **OKLCH color strategy ladder** — four commitment levels: restrained / committed / full / drenched
 
+## Examples
+
+Pages built from the same design DNA — brand path (visual engines · soul-driven) across multiple industries:
+
+| | |
+|:---:|:---:|
+| ![Nexus — Three.js particle orbital rings, distributed intelligence](assets/examples/nexus.png) | ![Drift — Canvas 2D flow field particles, brand landing page](assets/examples/drift.png) |
+| ![Forge — Three.js particle fire, game studio](assets/examples/forge.png) | ![Volt — all-electric car, bold typographic hero](assets/examples/volt.png) |
+| ![Morning Ritual — specialty coffee, editorial light theme](assets/examples/coffee.png) | ![Eclipse — data gravity platform, bold typographic](assets/examples/eclipse.png) |
+
 ## Installation & Tool Support
 
 ### npx skills (recommended · one command for Claude Code / Codex / Cursor, etc.)

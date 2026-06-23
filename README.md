@@ -35,6 +35,16 @@
 - **design-model token 锁定** — 多页一致性 + 生成 → 自检 → 迭代闭环
 - **OKLCH 配色策略阶梯** — restrained / committed / full / drenched 四档承诺
 
+## 示例作品
+
+出自同一设计基因的页面 —— brand 路线（视觉引擎 · 灵魂驱动）多行业覆盖：
+
+| | |
+|:---:|:---:|
+| ![Nexus — Three.js 粒子轨道环，分布式智能平台](assets/examples/nexus.png) | ![Drift — Canvas 2D 流场粒子，品牌落地页](assets/examples/drift.png) |
+| ![Forge — Three.js 粒子火焰，游戏工作室](assets/examples/forge.png) | ![Volt — 纯电汽车，粗体排版](assets/examples/volt.png) |
+| ![Morning Ritual — 精品咖啡，editorial 浅色主题](assets/examples/coffee.png) | ![Eclipse — 数据引力平台，粗体排版](assets/examples/eclipse.png) |
+
 ## 安装 & 工具支持
 
 ### npx skills（推荐 · 一条命令通用于 Claude Code / Codex / Cursor 等）
