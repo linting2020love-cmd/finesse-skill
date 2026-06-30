@@ -37,7 +37,7 @@ A page that *claims* SPECTACLE 8 but ships a white hero is broken, not plain. Ve
    ```bash
    node skills/finesse-ui/scripts/detect.mjs --json <target>
    ```
-   A `P0 spectacle-not-shown` or `P0 no-reduced-motion` here is a hard fail.
+   A `P0 spectacle-not-shown` or `P0 no-reduced-motion` in the output (`p0 > 0`) is a hard fail — fix before shipping. The script always exits 0 (findings live in the JSON); add `--strict` if you want it to block with a non-zero exit in a git hook / CI. If the script isn't present, fall back to the by-hand checks above — don't treat its absence as a pass.
 2. **Runtime (when a browser is available):** the grep only proves the *code* exists, not that it *renders*. Open the page and confirm real pixels:
    - Use the Playwright MCP tools (`browser_navigate` → `browser_take_screenshot`) to load the page and screenshot the hero.
    - Confirm the engine drew something — **not** a white screen, not a flat background-color fill. If the hero is blank, the engine errored; check `browser_console_messages` for the throw.

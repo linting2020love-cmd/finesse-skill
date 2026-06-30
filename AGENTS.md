@@ -87,7 +87,7 @@ Run the local detector first (no network, pure file scan), then add your own eye
 node skills/finesse-ui/scripts/detect.mjs --json <target ...>
 ```
 
-It reports findings P0/P1/P2 with `file:line` and exits non-zero on any P0 (e.g. SPECTACLE claimed but no engine found, missing reduced-motion fallback). Then check the taste-level offenders by hand. Hard bans:
+It reports findings P0/P1/P2 with `file:line`, a `p0` count, and a `notCovered[]` list of tells it can't see. It **always exits 0** (findings are data in the JSON, not a tool failure — read `p0`; `--strict` makes a P0 block with a non-zero exit for CI). A clean run means "no regex-detectable slop", not "good page" — always continue into the by-hand pass. If the script is absent, scan by hand; don't treat its absence as a pass. Hard bans:
 - Em-dashes in copy as a flourish (most-violated AI tell — zero exceptions)
 - Gradient text, default glassmorphism, AI-purple glow, side-stripe card borders
 - Eyebrow label on every section; numbered `01 · 02 · 03` section markers
@@ -97,7 +97,7 @@ It reports findings P0/P1/P2 with `file:line` and exits non-zero on any P0 (e.g.
 - Zero imagery on image-implied briefs
 
 ### 6. Pre-flight before declaring done
-See `skills/finesse-ui/references/preflight.md`. Run `node skills/finesse-ui/scripts/detect.mjs --json <target>` (must exit 0), and when a browser is available, open the page and screenshot the hero to confirm the engine renders real pixels (not a white/flat screen). Mandatory gates:
+See `skills/finesse-ui/references/preflight.md`. Run `node skills/finesse-ui/scripts/detect.mjs --json <target>` and confirm `p0` is 0 (the script always exits 0; the count lives in the JSON), and when a browser is available, open the page and screenshot the hero to confirm the engine renders real pixels (not a white/flat screen). Mandatory gates:
 - [ ] Design Read output + dials documented
 - [ ] Substrate applied (grain, vignette, type tension, color lock)
 - [ ] SPECTACLE claimed = SPECTACLE shipped (detector + browser-verified, not just asserted)

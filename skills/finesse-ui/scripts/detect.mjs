@@ -4,22 +4,45 @@
 // finesse-specific "spectacle claimed but not shown" failure.
 //
 // Usage:
-//   node detect.mjs [--json] <file ...>
+//   node detect.mjs [--json] [--strict] <file ...>
 //   node detect.mjs --json skills/finesse-ui/examples/*.html
 //
-// Exit code: 0 = no P0 findings, 1 = at least one P0 (e.g. spectacle claimed not shown).
-// The `audit` command (reference/audit.md) consumes this; a human can also read it.
+// Exit code: 0 by default — ALWAYS, even when P0 findings exist. Findings are
+// DATA carried in the report (the JSON `p0` count), not a tool failure. A
+// non-zero exit reads to an agent as "this tool is broken" and it abandons the
+// tool entirely, falling back to eyeballing — so the default path never does
+// that. Pass --strict to make a P0 finding block with exit 1 (for CI / git
+// hooks / humans who want a hard gate). The `audit` command (references/audit.md)
+// consumes the --json output and decides for itself; it does not need exit codes.
 
 import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 
 const args = process.argv.slice(2);
 const asJson = args.includes('--json');
-const files = args.filter((a) => a !== '--json');
+const strict = args.includes('--strict');
+const files = args.filter((a) => a !== '--json' && a !== '--strict');
+
+// What the regex layer canNOT see. A clean run means "no regex-detectable slop",
+// NOT "this page is good" — these taste/structure/runtime tells need a human eye
+// (or the Playwright runtime pass in preflight.md §C). Surfaced in every report so
+// a green result never reads as license to skip the visual audit.
+const NOT_COVERED = [
+  'default-category aesthetic (the vibe, not just token names — beige+brass craft, AI purple-glow)',
+  'div-based fake screenshots / fake dashboards',
+  'identical / generic card grids (icon + title + text × N)',
+  'zero imagery on an image-implied brief (food / hotel / fashion / travel)',
+  'glassmorphism / AI-purple-glow used as decoration',
+  'layout-family repetition (§5) and whether the soul is actually distinct',
+  'whether the engine RENDERS real pixels (needs the Playwright runtime pass, not a grep)',
+];
 
 if (files.length === 0) {
-  console.error('usage: node detect.mjs [--json] <file ...>');
-  process.exit(2);
+  // Guidance, not an error. Never teach the agent to abandon the tool.
+  const note = 'usage: node detect.mjs [--json] [--strict] <file ...>';
+  if (asJson) console.log(JSON.stringify({ p0: 0, files: [], notCovered: NOT_COVERED, note }, null, 2));
+  else console.log(note);
+  process.exit(0);
 }
 
 // ---- helpers ---------------------------------------------------------------
@@ -241,7 +264,7 @@ function severityRank(s) {
 // ---- output ----------------------------------------------------------------
 
 if (asJson) {
-  console.log(JSON.stringify({ p0: p0Count, files: report }, null, 2));
+  console.log(JSON.stringify({ p0: p0Count, files: report, notCovered: NOT_COVERED }, null, 2));
 } else {
   for (const { file, findings, error } of report) {
     const name = basename(file);
@@ -250,7 +273,7 @@ if (asJson) {
       continue;
     }
     if (!findings.length) {
-      console.log(`\n✓ ${name} — no slop detected`);
+      console.log(`\n✓ ${name} — no regex-detectable slop (visual audit still required)`);
       continue;
     }
     console.log(`\n● ${name} — ${findings.length} finding(s)`);
@@ -261,6 +284,10 @@ if (asJson) {
     }
   }
   console.log(`\n${p0Count ? `✗ ${p0Count} P0 finding(s) — ships broken` : '✓ no P0 findings'}`);
+  console.log(`\nRegex layer only — still needs a human/Playwright pass for:`);
+  for (const c of NOT_COVERED) console.log(`  · ${c}`);
 }
 
-process.exit(p0Count ? 1 : 0);
+// See the exit-code note at the top: default is always 0 so the agent never reads
+// a finding as a tool malfunction. Only --strict turns a P0 into a blocking exit.
+process.exit(strict && p0Count ? 1 : 0);
