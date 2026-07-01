@@ -79,6 +79,8 @@ Reach for standard components; never reinvent affordances. Typical inventory: **
 
 Three-layer tokens: **primitive** (`--blue-600:#2563EB`, `--space-4:1rem`) → **semantic** (`--color-primary`, `--spacing-section`) → **component** (`--button-padding`, `--card-padding`).
 
+**Palette starting points** (see `design-dna.md` §6 for full table + hex): Trust SaaS (blue+orange), Financial dark (near-black+green/red), Analytics dashboard (blue+amber), Developer tool/IDE (slate+run-green), Clinical calm (cyan+health-green), Authority navy (navy+gold). Pick by product domain, not by default — not every dashboard is Trust SaaS blue+orange.
+
 - **Spacing:** 4px base (4/8/12/16/24/32/48). Denser than marketing. Always tokens, never hardcoded.
 - **Type scale (fixed, NOT `clamp()`):** 12 / 14 / 16 / 18 / 20 / 24px. Product users are on fixed-size screens; respond by changing columns, not font size (tables must stay aligned).
 - **Radius/elevation:** lock one scale. Most components md radius + md shadow; cards lg+lg; inputs sm, shadow on focus only; modal lg + xl shadow.

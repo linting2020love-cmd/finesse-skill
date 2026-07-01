@@ -44,6 +44,8 @@ Failing any item below is a **shipping blocker**. Fix before delivery.
 - **Hero = text + gradient blob.** A blob is not a hero visual. → a real engine (see `hero-engines.md`) or real imagery.
 - **Pure `#fff` / `#000`**, hard `#333` borders, untinted black drop shadows on light bg. → tinted neutrals, translucent borders, hue-matched shadows.
 - **Mixed corner-radius systems** — round buttons in a square layout, etc. → pick one radius scale and lock it.
+- **Button contrast failure** — white button + white text, `bg-white` CTA with `text-white` label, a transparent/borderless button blending into the page bg, a ghost button over a photographic background with no backdrop. → audit every CTA: label vs. button bg ≥4.5:1 (≥3:1 for 18px+ bold); ghost-over-photo gets a scrim, `backdrop-filter: blur()`, or a 1px stroke.
+- **Form contrast failure** — a near-white placeholder on a near-white input, a white form card floating on a white section, helper/error text lighter than 4.5:1 against its bg. → audit every input, placeholder, focus ring, helper, and error string against the section it sits on, not just the page default.
 
 **Typography**
 - **Reflex-default fonts** reached for blindly: `Inter, Fraunces, Instrument Serif, Playfair, Cormorant, Space Grotesk, Syne, DM Sans, Newsreader, Lora, IBM Plex *, Space Mono`. All good fonts, all over-used. → fine *with a reason*; otherwise rotate to a less-tired sans-display (Geist, Cabinet Grotesk, PP Neue Montreal, GT Walsheim, ABC Diatype).
@@ -57,9 +59,15 @@ Failing any item below is a **shipping blocker**. Fix before delivery.
   - accent: `#b08947 #b6553a #9a2436 #9c6e2a #bc7c3a #7d5621`
   - text: `#1a1714 #1a1814 #1b1814`
   - token names `--cream --sand --bone --paper --flour --linen` are themselves a tell.
-  → saturated brand body (terracotta/oxblood/near-black), true off-white (chroma 0), or deep mid-tone. Rotate; never two warm-craft palettes in a row.
+  → rotate through: **Cold Luxury** (silver-grey + chrome + smoke), **Forest** (deep green + bone + amber), **Black and Tan** (true off-black + warm tan, no beige), **Cobalt + Cream** (saturated blue on one neutral, no brass), **Terracotta + Slate** (warm rust on cool grey, no brass), **Olive + Brick + Paper**, or **pure monochrome + one saturated pop**. Never ship the same warm-craft palette twice in a row for consecutive briefs.
+- **THE LILA RULE — AI-purple/blue glow**, and its generic-indigo cousin. Banned as default for tech/SaaS/AI briefs:
+  - the whole family: purple-blue gradient buttons, glowing neon-mesh backgrounds, desaturated-indigo-on-near-black (`#5E6AD2`-style "Linear clone")
+  - specifically banned as a lazy accent: `#6366f1` (generic indigo) — the single most over-used hex in AI-generated UI
+  → neutral base (Zinc/Slate/Stone or a tinted near-black) + one high-contrast, deliberately-chosen accent. *(Override: the brief explicitly asks for purple, executed with intent — consistent palette, harmonised neutrals, restrained gradients, not default slop.)*
+- **Other category-default palette families** — name and reject the reflex before designing: fintech → navy + gold; wellness/skincare → sage green + cream; fintech-dashboard → `#020617`-style near-black + generic green/red status colors with no brand hue. If the brief's category alone predicts the palette, rework it (see §0 Two-Altitude Check).
 - **Accent drift** — a warm-grey site sprouting a blue CTA in section 7. → color lock: one accent owns the whole page.
 - **Theme inversion mid-scroll** — a warm-paper section inside a dark page. → one theme, locked (unless a deliberate one-time scroll theme-switch).
+- **Saturation blowout** — accent chroma pushed so high it reads neon/cheap rather than premium. → keep primary saturation restrained by default (roughly <80% in HSL terms, or OKLCH chroma ≤0.23; if lightness is high, cap chroma lower, ≤0.18, to avoid fluorescence).
 
 **Content & copy**
 - **Eyebrow-cluttered, buzzword copy**; cute-but-wrong wordplay; fake-craftsman labels; mock-poetic micro-meta ("elegant nothing"). → re-read every visible string; replace anything broken/unclear/AI-cute with a plain functional sentence.

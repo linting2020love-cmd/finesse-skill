@@ -37,6 +37,12 @@ Every page declares a small, named token set. Dark is the default (28 of 37 page
 
 Rules: no `#fff`/`#000` anywhere. Tint neutrals a few points toward the brand hue (add 0.005–0.015 OKLCH chroma). One accent, locked across the whole page.
 
+**Hard numeric floors (non-negotiable):**
+- `ink` vs `bg` contrast ratio ≥ 7:1 (body text). `muted` vs `bg` ≥ 3.5:1. UI components/icons ≥ 3:1 (WCAG AA for large text/graphics). Test light and dark independently — never assume one mode's values pass in the other.
+- Primary accent chroma ≤ 0.23 in OKLCH; if accent lightness > 0.78, cap chroma ≤ 0.18 (prevents neon/fluorescent blowout on pale accents).
+- Accent vs. its own "on-accent" foreground (button label, etc.) ≥ 4.5:1.
+- Avoid muddy mid-tone accents: lightness 0.45–0.72 combined with chroma < 0.10 reads as neither neutral nor a color — pick a side.
+
 **Color naming convention (three-part — mandatory for any named token):**
 Every color in a finesse system must have all three: `Descriptive name (hex) — functional role and constraint`.
 
@@ -140,10 +146,29 @@ body { font-weight: 300; }        /* extreme contrast against the heading */
 | Earth | `#2A1B11` | terracotta `#C0562F` + olive `#6E6A3E` | coffee, organic, artisan |
 | Editorial light | `#F8F6F2` | rust `#A8331F` (single) | magazine, film, publication |
 | Quiet luxury light | `#F0F0EE` | sage `#2D5A3D` (single) | architecture, hotels, wellness |
+| Cold luxury | `#1A1B1E` | chrome `#C4C8CC` + smoke `#6B6F73` | EV, wearables, precision hardware — the non-beige alternative for premium-consumer |
+| Forest | `#12180F` | deep green `#2F5233` + bone `#E8E4D8` + amber `#C87820` accent | outdoor gear, sustainability, premium-craft (non-beige) |
+| Black and tan | `#0D0C0B` | warm tan `#C9A574` on true off-black, sharp contrast | leather goods, menswear, heritage without beige |
+| Cobalt + cream | `#F5F2EA` | saturated cobalt `#1E4FD8` (single, no brass) | premium-consumer light mode, no-brass alternative |
+| Terracotta + slate | `#2C2E33` | warm rust `#B4502E` on cool slate | ceramics, home goods, warm-on-cool contrast |
+| Swiss modern | `#FFFFFF` | true black `#0A0A0A` + red `#FF3300` (single) | enterprise, print-adjacent, editorial-brutalist |
+| Duotone neon nightlife | `#0A0A0F` | electric blue `#0066FF` + acid `#D4FF00` | clubs, festivals, gaming, esports |
+| Trust SaaS | `#F8FAFC` | blue `#2563EB` + orange `#EA580C` CTA | B2B SaaS, dashboards — restrained, not purple |
+| Financial dark | `#020617` | signal green `#22C55E` / alert red `#DC2626` | fintech dashboards, trading, data-dense product |
+| Playful pastel | `#FFFFFF` / `#0A0A0A` | duo-green `#58CC02` + sky `#1CB0F6` + yellow `#FFC800` | consumer edtech, kids, gamified product |
+| Warm publication | `#F5F0E8` | terracotta `#CC785C` on near-black text `#191919` | editorial-tech, essays, thoughtful-brand publication |
+| Olive + brick + paper | `#F3F0E4` | olive `#5C5A3A` + brick `#A83F2C` | wellness, craft, editorial-warm — non-beige, non-brass alternative |
+| Pure monochrome + pop | `#0B0B0D` (or `#F7F6F3` light) | one saturated pop, pick+lock: electric blue `#2D6BFF` / emerald `#0FA968` / hot pink `#FF2D78` | portfolio, gallery, youth-creative — extremes plus a single deliberate accent |
+| Analytics dashboard | `#F8FAFC` | blue `#1E40AF` + amber `#D97706` highlight | product register — data-viz clarity, admin/analytics |
+| Developer tool / IDE | `#0F172A` | slate `#1E293B` + run-green `#22C55E` | product register — dev tools, CLI-adjacent, IDE |
+| Clinical calm | `#ECFEFF` | cyan `#0891B2` + health-green `#059669` | product register — healthcare, wellness apps, clinical dashboards |
+| Authority navy | `#F8FAFC` | navy `#1E3A8A` + gold `#B45309` | product register — legal, insurance, gov-adjacent B2B, conservative trust |
 
 Strategy ladder (pick one, commit): **Restrained** (accent ≤10%) → **Committed** (one color 30–60%) → **Full** (3–4 named roles) → **Drenched** (the surface IS the color). Restrained suits product; Committed/Drenched suit brand heroes.
 
-> **Beige+brass+espresso is the saturated AI default of 2026.** Token names like `--cream / --sand / --bone / --paper` are themselves a tell. For a "warm, traditional" brief, reach for a saturated brand body (terracotta, oxblood, near-black), a true off-white (chroma 0), or a deep mid-tone — not near-white warm-tinted cream.
+**Rotation discipline:** never ship the same family for two consecutive briefs in the same category — if the last premium-consumer page used Warm heritage, the next one uses Cold luxury or Forest, not Warm heritage again. Family choice should follow from the brief's specific brand personality, not from "which one haven't I used in a while" alone — but when several families fit equally well, use the rotation as the tiebreaker.
+
+> **Beige+brass+espresso is the saturated AI default of 2026.** Token names like `--cream / --sand / --bone / --paper` are themselves a tell. For a "warm, traditional" brief, reach for Cold luxury, Forest, Black and tan, or a saturated brand body (terracotta, oxblood, near-black) — not near-white warm-tinted cream. See `anti-cheap.md` §Color for the full banned-hex list and the AI-purple/`#6366f1` equivalent trap for tech/SaaS briefs.
 
 ---
 
