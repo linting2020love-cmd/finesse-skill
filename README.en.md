@@ -94,6 +94,18 @@ cp .github/copilot-instructions.md your-project/.github/
 
 Copilot reads it automatically and generates code to finesse standards.
 
+### Trae
+
+Copy the full `.trae/skills/finesse-ui/` directory (SKILL.md + references + examples + scripts) into your project:
+
+```bash
+cp -r .trae/skills/finesse-ui your-project/.trae/skills/
+# Trae CN uses .trae-cn, same full directory:
+cp -r .trae-cn/skills/finesse-ui your-project/.trae-cn/skills/
+```
+
+This is a full mirror, not a condensed rule — Trae's Skills folder convention (`.trae/skills/<name>/SKILL.md`) matches Claude Code's natively and can load every reference file on demand, so copying the whole directory gets you the same depth as Claude Code. **Maintenance note:** any change to `skills/finesse-ui/` must be copied into `.trae/skills/finesse-ui/` and `.trae-cn/skills/finesse-ui/` by hand — these are independent static copies, not symlinks, and won't update themselves.
+
 ### Any other tool (ChatGPT / direct API / etc.)
 
 Paste the contents of `skills/finesse-ui/SKILL.md` into the system prompt or the first user message. No installation required.
@@ -125,9 +137,11 @@ finesse-skill/
 │           ├── EXAMPLES.md               # 5 showcase pages with persona/engine annotations
 │           └── *.html                    # Real showcase pages (read-only reference)
 ├── .claude-plugin/plugin.json            # Claude Code native plugin
-├── .cursor/rules/finesse-ui.mdc          # Cursor rules (auto-loaded on UI files)
+├── .cursor/rules/finesse-ui.mdc          # Cursor rules (condensed single file, auto-loaded)
 ├── AGENTS.md                             # OpenAI Codex instructions
-├── .github/copilot-instructions.md       # GitHub Copilot instructions
+├── .github/copilot-instructions.md       # GitHub Copilot instructions (condensed single file)
+├── .trae/skills/finesse-ui/              # Trae (full mirror, same depth as skills/finesse-ui, synced by hand)
+├── .trae-cn/skills/finesse-ui/           # Trae CN (same, full mirror)
 ├── README.md                             # Chinese README
 ├── README.en.md                          # This file
 └── LICENSE

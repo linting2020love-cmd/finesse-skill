@@ -92,6 +92,18 @@ cp .github/copilot-instructions.md your-project/.github/
 
 Copilot 会自动读取并以 finesse 标准生成代码。
 
+### Trae
+
+把 `.trae/skills/finesse-ui/`（完整目录，含 SKILL.md + references + examples + scripts）复制到你的项目：
+
+```bash
+cp -r .trae/skills/finesse-ui your-project/.trae/skills/
+# 国内版 Trae 用 .trae-cn，同样是完整目录：
+cp -r .trae-cn/skills/finesse-ui your-project/.trae-cn/skills/
+```
+
+和 Claude Code 一样是完整镜像（不是精简版）——Trae 的 Skills 目录结构（`.trae/skills/<name>/SKILL.md`）与 Claude Code 原生一致，能按需加载全部 reference 文件，所以直接复制整个目录即可拿到完整深度。**维护提醒**：`skills/finesse-ui/` 有任何改动，都要同步复制到 `.trae/skills/finesse-ui/` 和 `.trae-cn/skills/finesse-ui/`，这两份是独立静态拷贝，不会自动跟着更新。
+
 ### 任何其他工具（ChatGPT / API 直调 等）
 
 把 `skills/finesse-ui/SKILL.md` 的内容粘贴进 system prompt 或第一条消息即可，无需安装。
@@ -123,9 +135,11 @@ finesse-skill/
 │           ├── EXAMPLES.md               # 5 个正例对应的 persona/engine
 │           └── *.html                    # 真实 showcase 页（只读参考）
 ├── .claude-plugin/plugin.json            # Claude Code 原生插件
-├── .cursor/rules/finesse-ui.mdc          # Cursor 规则（自动加载）
+├── .cursor/rules/finesse-ui.mdc          # Cursor 规则（精简单文件，自动加载）
 ├── AGENTS.md                             # OpenAI Codex 指令
-├── .github/copilot-instructions.md       # GitHub Copilot 指令
+├── .github/copilot-instructions.md       # GitHub Copilot 指令（精简单文件）
+├── .trae/skills/finesse-ui/              # Trae（完整镜像，与 skills/finesse-ui 同深度，需手动同步）
+├── .trae-cn/skills/finesse-ui/           # Trae 国内版（同上，完整镜像）
 ├── README.md
 └── LICENSE
 ```
