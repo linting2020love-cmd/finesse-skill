@@ -1,5 +1,5 @@
 ---
-description: finesse-ui design skill — never-cheap, high-craft web interfaces. Routes by register: brand (landing pages, hero sites, portfolios) → soul + spectacle engine; product (dashboards, admin, analytics) → component system + data viz. Enforces premium substrate, anti-slop blacklist, and pre-flight check on every output.
+description: 'finesse-ui design skill — never-cheap, high-craft web interfaces. Routes by register: brand (landing pages, hero sites, portfolios) → soul + spectacle engine; product (dashboards, admin, analytics) → component system + data viz. Enforces premium substrate, anti-slop blacklist, and pre-flight check on every output.'
 globs: ["**/*.html", "**/*.css", "**/*.scss", "**/*.sass", "**/*.tsx", "**/*.jsx", "**/*.ts", "**/*.js", "**/*.vue", "**/*.svelte"]
 alwaysApply: false
 ---
