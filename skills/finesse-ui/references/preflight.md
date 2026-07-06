@@ -57,7 +57,7 @@ A page that *claims* SPECTACLE 8 but ships a white hero is broken, not plain. Ve
 - [ ] No em-dashes in copy. No div-based fake screenshots. No gradient-text/glass/AI-purple as default.
 - [ ] No fake-precise numbers without a source. No banned beige+brass default palette.
 - [ ] No identical card grids. No numbered `01·02·03` unless a real sequence.
-- [ ] **Real imagery** where the brief implies it (food/hotel/fashion/travel/product).
+- [ ] **Real imagery** where the brief implies it (food/hotel/fashion/travel/product); sourced per `asset-sourcing.md` (generate/stock/placeholder), not a silent gradient-blob substitute.
 - [ ] Real SVG logos (not text wordmarks) on any "trusted by" wall.
 - [ ] Fonts chosen with a reason — not a blind reach for Inter/Fraunces/Instrument Serif.
 

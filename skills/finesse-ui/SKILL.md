@@ -1,7 +1,7 @@
 ---
 name: finesse-ui
-description: Build never-cheap, high-craft web interfaces — both brand surfaces (landing pages, brand sites, launches, portfolios, hero pages with real WebGL/Three.js/Canvas/GSAP engines) and product UI (dashboards, admin panels, analytics, data tables, app shells, settings). Routes by register: brand → soul + spectacle engine; product → component system + information density + data viz. Always reads the brief first and audits against an anti-slop cheapness blacklist. Supports verb commands (audit · bolder · quieter · soul · animate · densify · redesign) for targeted iteration on existing pages. Triggers on "make this look premium", "landing page", "dashboard", "admin panel", "analytics UI", "data table", "app UI", "give it a soul / a vibe", "anti-slop", "hero animation", "/finesse".
-version: 0.5.0
+description: Build never-cheap, high-craft web interfaces — brand surfaces (landing pages, brand sites, launches, portfolios, hero pages with real WebGL/Three.js/Canvas/GSAP engines), product UI (dashboards, admin panels, analytics, data tables, app shells, settings), and commerce pages (product detail pages, listing/category pages, cart, checkout). Routes by register: brand → soul + spectacle engine; product → component system + information density + data viz; commerce → PDP/PLP skeletons + anti-dark-pattern rules. Always reads the brief first and audits against an anti-slop cheapness blacklist. Supports verb commands (audit · bolder · quieter · soul · animate · densify · redesign) for targeted iteration on existing pages. Triggers on "make this look premium", "landing page", "dashboard", "admin panel", "analytics UI", "data table", "app UI", "product page", "PDP", "listing page", "checkout", "give it a soul / a vibe", "anti-slop", "hero animation", "/finesse".
+version: 0.7.0
 user-invocable: true
 argument-hint: "[craft · audit · bolder|quieter|soul · animate|depth|densify · redesign · init|document] [target]"
 license: MIT
@@ -42,6 +42,8 @@ The `references/*.md` files are the deep material. Load the one you need for the
 | `anti-cheap.md` | Before any delivery — cheapness scan |
 | `product-ui.md` | Dashboard / admin / data app (product register) |
 | `dataviz.md` | Chart-heavy product UI beyond the starter table — full 25-type selection matrix, a11y grade + mandatory fallback, library picks |
+| `commerce-ui.md` | Product detail page (PDP), listing/category page (PLP), cart, checkout — commerce register |
+| `asset-sourcing.md` | Brief implies real imagery but no assets provided — generate vs. real stock vs. placeholder fallback, with the authorization step for each |
 | `preflight.md` | Final checklist before saying "done" |
 | `design-model.md` | Multi-page projects — token consistency |
 | `redesign-mode.md` | Upgrading an existing page — audit-first protocol |
@@ -97,6 +99,10 @@ Most AI design output is bad because the model jumps to a default aesthetic inst
 
 - **brand** — design IS the product: landing page, brand site, launch, portfolio, campaign, hero page. Be bold, opinionated, spectacular. Goes the soul + hero-engine route (§2, §4).
 - **product** — design SERVES the product: dashboard, admin, analytics, data table, app shell, settings, tool. Optimize for clarity, density, usability. Goes the component-system route (`references/product-ui.md`). Still never cheap — it inherits the substrate (§3) and the cheapness blacklist (§6).
+- **commerce** — a third, hybrid case: product detail pages (PDP), category/listing pages (PLP), cart, checkout. It doesn't cleanly fit either bucket above, so don't force it — route by which job the specific page is doing:
+  - A **PDP selling one hero item** (a single SKU, a launch, a flagship product) leans **brand**: pick a soul (§2), but keep DENSITY up for specs/reviews/trust signals — see `references/commerce-ui.md` for the PDP skeleton.
+  - A **PLP / marketplace with many SKUs** (filters, sort, grid of many products) leans **product**: DENSITY high, SPECTACLE low, same as a dashboard — see `references/product-ui.md` for grid/filter patterns plus `references/commerce-ui.md` for commerce-specific rules (price/CTA placement, cart, checkout, dark-pattern bans).
+  - When unsure which it is, ask: *"is this page trying to sell the vibe of one product, or help someone compare/filter many?"*
 
 **Read project memory first.** If a `PRODUCT.md` exists at the project root, read it (register, users, brand personality, locked dials, anti-references) — it **overrides your guesses**. If a `design-model.yaml` exists, read it too for the locked palette/type/substrate so this page matches existing ones. These are written by `init` / `document` (see Commands).
 
@@ -136,6 +142,8 @@ If the brief contains these cues, use these presets as a starting point before r
 | "data-heavy", "dashboard", "analytics" | 4 | 2 | 9 |
 | "landing page" (no other cues) | 7 | 6 | 4 |
 | "portfolio" | 8 | 6 | 3 |
+| "product page", "PDP", "product detail" | 6 | 4 | 6 |
+| "商品列表", "PLP", "category page", "marketplace" | 3 | 2 | 8 |
 
 Override these immediately if the brief provides stronger or contradicting signals.
 

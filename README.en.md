@@ -115,6 +115,8 @@ finesse-skill/
 │       │   ├── anti-cheap.md             # Anti-slop blacklist (AI tells + bans + reflex-reject)
 │       │   ├── product-ui.md             # Product route: dashboards/tables/charts/forms/states
 │       │   ├── dataviz.md                # Chart decision matrix: 25 types × a11y grade × library picks
+│       │   ├── commerce-ui.md            # Commerce route: PDP/PLP/cart/checkout + dark-pattern blacklist
+│       │   ├── asset-sourcing.md         # No assets on hand: generate vs. real stock vs. placeholder + authorization gate
 │       │   ├── preflight.md              # Pre-flight checklist (includes strategic omissions)
 │       │   ├── redesign-mode.md          # Redesign protocol: audit-first, six-step upgrade
 │       │   ├── design-model.md           # Multi-page token consistency template

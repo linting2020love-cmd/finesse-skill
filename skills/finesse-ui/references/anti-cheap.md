@@ -80,7 +80,7 @@ Failing any item below is a **shipping blocker**. Fix before delivery.
 - **Duplicate CTA intent** — "Get in touch" + "Contact us" + "Let's talk" on one page. → one label per intent everywhere.
 
 **Imagery**
-- **Zero imagery on an image-implied brief** (food, hotel, fashion, travel, product). That's a bug, not minimalism. → real/generated photography; even restrained editorial needs 2–3 real images.
+- **Zero imagery on an image-implied brief** (food, hotel, fashion, travel, product). That's a bug, not minimalism. → real/generated photography; even restrained editorial needs 2–3 real images. No assets on hand? See `asset-sourcing.md` for the generate-vs-stock-vs-placeholder decision.
 - **Hand-rolled decorative SVG illustrations** as default. → icon libraries for icons; for brand marks, a simple monogram only.
 - **Plain text wordmarks** for a "trusted by" logo wall. → real SVG logos (Simple Icons `cdn.simpleicons.org/{slug}`), or a generated monogram for invented brands. Logos only — no category labels under them.
 
