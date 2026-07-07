@@ -1,7 +1,7 @@
 ---
 name: finesse-ui
 description: 'Build never-cheap, high-craft web interfaces — brand surfaces (landing pages, brand sites, launches, portfolios, hero pages with real WebGL/Three.js/Canvas/GSAP engines), product UI (dashboards, admin panels, analytics, data tables, app shells, settings), and commerce pages (product detail pages, listing/category pages, cart, checkout). Routes by register: brand → soul + spectacle engine; product → component system + information density + data viz; commerce → PDP/PLP skeletons + anti-dark-pattern rules. Always reads the brief first and audits against an anti-slop cheapness blacklist. Supports verb commands (audit · bolder · quieter · soul · animate · densify · redesign) for targeted iteration on existing pages. Triggers on "make this look premium", "landing page", "dashboard", "admin panel", "analytics UI", "data table", "app UI", "product page", "PDP", "listing page", "checkout", "give it a soul / a vibe", "anti-slop", "hero animation", "/finesse".'
-version: 0.8.0
+version: 0.9.0
 user-invocable: true
 argument-hint: "[craft · audit · bolder|quieter|soul · animate|depth|densify · redesign · init|document] [target]"
 license: MIT
@@ -35,7 +35,8 @@ The `references/*.md` files are the deep material. Load the one you need for the
 | Reference | When to load |
 |-----------|-------------|
 | `design-dna.md` | Laying the premium substrate (grain, vignette, type, color tokens) |
-| `hero-engines.md` | Building the hero engine (brand register) |
+| `theming.md` | Brief asks for a light/dark toggle or multiple swappable named themes — the token-role and hardcoded-color pitfalls of a runtime palette switch (not the single-locked-palette default) |
+| `hero-engines.md` | Building the hero engine (brand register); also covers a secondary motion vocabulary (split-char reveal, magnetic buttons, curtain wipe, scan-line, per-card fly-in) for non-hero moments elsewhere on the page |
 | `3d-effects.md` | Adding a 3D moment — CSS tilt/flip/coverflow/depth-parallax or Three.js model/displacement |
 | `style-personas.md` | Picking a soul (brand register) |
 | `inspiration-catalog.md` | Persona picked but you want a wider menu of proven techniques for that soul, or the brief doesn't fit any of the 10 personas cleanly |
@@ -203,7 +204,7 @@ The difference between a cheap page and an expensive one is mostly a thin physic
 - **Layered z-index** — engine(0) · grain(1) · vignette · content(5). Depth, not flatness.
 - **Translucent borders** — `rgba(255,255,255,.07–.22)` on dark, `rgba(0,0,0,.06–.08)` on light. Never a hard `#333` line.
 - **No pure `#fff` / `#000`.** Tint every neutral a few points toward the brand hue.
-- **Color lock (mandatory):** once an accent is chosen, it owns the whole page. No surprise teal badge on a rose page. Audit every component before shipping.
+- **Color lock (mandatory):** once an accent is chosen, it owns the whole page. No surprise teal badge on a rose page. Audit every component before shipping. If the brief actually asks for a swappable/multi-theme experience instead of one locked palette, see `references/theming.md` — the token-role and hardcoded-color pitfalls there are different from a single-palette build.
 
 > Internally reason in **OKLCH** for palettes (perceptual consistency, easy light/dark pairing), even if you emit hex. Design light and dark together; test contrast in each — never just invert.
 

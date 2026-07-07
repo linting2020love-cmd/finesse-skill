@@ -38,6 +38,7 @@ This skill's own shipped examples already do this: `nova-brutal-typographic.html
 - **License discipline.** Unsplash License and Pexels License both permit free commercial use without attribution — but that's specific to those two; don't assume every "free image site" carries the same terms. Check the specific source's license before use; when in doubt, prefer Unsplash/Pexels over an unfamiliar site.
 - **Don't imply endorsement.** A stock photo of a person is not that person endorsing the (often fictional) brand — fine for mood/lifestyle imagery, not fine as a fake "customer testimonial" headshot presented as real.
 - **Real alt text**, matching what's actually depicted (see `commerce-ui.md` §1 for the PDP-specific version of this rule).
+- **If hotlinking turns out to be slow or unreliable once actually wired in** — a request hangs, takes far longer than a normal image fetch (tens of seconds instead of near-instant), or times out during your own verification pass — **stop and ask the user** whether to keep the hotlinked URLs as-is or download those same specific picks into the project locally instead. This is a build-blocking judgment call, not yours to make silently either direction: don't quietly switch to local download without saying so, and don't quietly leave slow/broken hotlinks in place and call the page done. State what you observed in one line ("the hotlinked Unsplash images are taking 50+ seconds to load in this environment — download the same 6 picks into `images/` locally instead, or leave them hotlinked?") and wait for the answer, the same way the initial source/pick authorization above requires a go-ahead.
 
 ## 4. Path C — No Generation, No Network: Generative Placeholder
 
@@ -63,3 +64,4 @@ When neither A nor B is available, **say so explicitly** — don't silently ship
 | Network fetch, no image-gen | B — real stock, hotlinked by specific ID | source + picks, one line — **wait for go-ahead** (downloading into the user's project is an external-fetch action, treat it as one) |
 | Neither | C — generative CSS/Canvas placeholder | explicit "this is a stand-in" disclosure |
 | User has real assets for a specific real subject | Use those, skip A/B/C | n/a — always preferred over stock/generated when the brief needs a *specific* real thing |
+| Path B hotlinks prove slow/unreliable mid-build | Stay on B or fall back to local download | **ask the user which** — don't silently pick either |
