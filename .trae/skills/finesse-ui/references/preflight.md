@@ -35,7 +35,7 @@ A page that *claims* SPECTACLE 8 but ships a white hero is broken, not plain. Ve
 
 1. **Static (always):** run the detector — it greps for a real engine and the reduced-motion fallback, and fails on "claimed-not-shown":
    ```bash
-   node .trae/skills/finesse-ui/scripts/detect.mjs --json <target>
+   node skills/finesse-ui/scripts/detect.mjs --json <target>
    ```
    A `P0 spectacle-not-shown` or `P0 no-reduced-motion` in the output (`p0 > 0`) is a hard fail — fix before shipping. The script always exits 0 (findings live in the JSON); add `--strict` if you want it to block with a non-zero exit in a git hook / CI. If the script isn't present, fall back to the by-hand checks above — don't treat its absence as a pass.
 2. **Runtime (when a browser is available):** the grep only proves the *code* exists, not that it *renders*. Open the page and confirm real pixels:

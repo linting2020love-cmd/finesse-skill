@@ -104,6 +104,16 @@ cp -r .trae-cn/skills/finesse-ui your-project/.trae-cn/skills/
 
 和 Claude Code 一样是完整镜像（不是精简版）——Trae 的 Skills 目录结构（`.trae/skills/<name>/SKILL.md`）与 Claude Code 原生一致，能按需加载全部 reference 文件，所以直接复制整个目录即可拿到完整深度。**维护提醒**：`skills/finesse-ui/` 有任何改动，都要同步复制到 `.trae/skills/finesse-ui/` 和 `.trae-cn/skills/finesse-ui/`，这两份是独立静态拷贝，不会自动跟着更新。
 
+### CodeBuddy
+
+把 `.codebuddy/skills/finesse-ui/`（完整目录，含 SKILL.md + references + examples + scripts）复制到你的项目：
+
+```bash
+cp -r .codebuddy/skills/finesse-ui your-project/.codebuddy/skills/
+```
+
+同样是完整镜像——CodeBuddy 的 Skills 目录结构（`.codebuddy/skills/<name>/SKILL.md`）与 Claude Code 原生一致。**维护提醒**：`skills/finesse-ui/` 有任何改动，都要同步复制到 `.codebuddy/skills/finesse-ui/`，这是一份独立静态拷贝，不会自动跟着更新。
+
 ### 任何其他工具（ChatGPT / API 直调 等）
 
 把 `skills/finesse-ui/SKILL.md` 的内容粘贴进 system prompt 或第一条消息即可，无需安装。

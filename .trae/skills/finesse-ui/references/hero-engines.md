@@ -179,6 +179,83 @@ addEventListener('pointermove', e => {
 
 ---
 
+## Extended Motion Vocabulary — Secondary Flourishes (not hero engines)
+
+The five engines above (§ above) are for the **one** full-bleed hero moment. These are smaller, cheap GSAP/CSS techniques for elsewhere on the page — a broader reveal/parallax vocabulary beyond Engine D's basics. They are normal page motion, not a second "hero" — use them freely across a page without violating the one-engine rule. Each still needs a motivated reason and a `prefers-reduced-motion` fallback (§ Engine discipline in SKILL.md §4).
+
+**Split-char / split-word reveal** — wrap each glyph (or word) of a heading in a masked span, animate it up into place with a stagger, instead of fading the whole line at once. A hallmark "premium agency site" heading move; reserve for a handful of key headlines (hero, section leads), not every `<h2>` on the page.
+```js
+function splitChars(el) {
+  Array.from(el.childNodes).forEach((node) => {
+    if (node.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      [...node.textContent].forEach((ch) => {
+        const outer = document.createElement('span'); outer.className = 'char';
+        const inner = document.createElement('span'); inner.className = 'char-inner';
+        inner.textContent = ch === ' ' ? ' ' : ch;
+        outer.appendChild(inner);
+        frag.appendChild(outer);
+      });
+      node.replaceWith(frag);
+    } else if (node.nodeType === 1 && node.tagName !== 'BR') {
+      splitChars(node); // recurse so a nested span (e.g. a differently-styled second line) splits too
+    }
+  });
+}
+```
+```css
+.char { display:inline-block; overflow:hidden; vertical-align:top; }
+.char-inner { display:inline-block; will-change:transform; }
+```
+```js
+gsap.fromTo(headingEl.querySelectorAll('.char-inner'),
+  { yPercent: 130, rotate: 6 },
+  { yPercent: 0, rotate: 0, duration: .9, ease: 'power4.out', stagger: 0.016,
+    scrollTrigger: { trigger: headingEl, start: 'top 85%', once: true } });
+```
+Split by **character**, not word — most CJK headings have no whitespace to split on, and character-by-character reads well for Latin type too. For a hero heading visible on load, skip `scrollTrigger` and just play the tween with a short delay after paint instead.
+
+**Magnetic buttons** — a CTA nudges a few px toward the cursor within its own bounds, springs back on pointer-leave. Small and cheap; reserve for 1-2 primary CTAs per page, not every link (it stops reading as deliberate craft once it's on everything).
+```js
+const moveX = gsap.quickTo(btn, 'x', { duration: .5, ease: 'power3.out' });
+const moveY = gsap.quickTo(btn, 'y', { duration: .5, ease: 'power3.out' });
+btn.addEventListener('pointermove', (e) => {
+  const r = btn.getBoundingClientRect();
+  moveX((e.clientX - r.left - r.width / 2) * 0.35);
+  moveY((e.clientY - r.top - r.height / 2) * 0.35);
+});
+btn.addEventListener('pointerleave', () => { moveX(0); moveY(0); });
+```
+Skip entirely under `prefers-reduced-motion` — this is pure flourish with no content cost if absent.
+
+**Curtain-wipe reveal** — a solid panel scales away (`scaleX`/`scaleY` from 1→0, `transformOrigin` at one edge) to reveal the content underneath, scrubbed to scroll position. Good for a comparison or before/after beat ("here's what's behind this"); don't reach for it as a decorative default on ordinary sections.
+```css
+.wipe { position:absolute; inset:0; z-index:2; background:var(--bg); pointer-events:none; transform-origin:right center; }
+```
+```js
+gsap.fromTo(wipeEl, { scaleX: 1 }, { scaleX: 0, ease: 'none', transformOrigin: 'right center',
+  scrollTrigger: { trigger: sectionEl, start: 'top 65%', end: 'top 15%', scrub: true } });
+```
+
+**Scan-line sweep** — a thin glowing bar sweeps across a data/chart block as the user scrolls through it, tying a "measurement" motif to a stats or results section.
+```js
+gsap.fromTo(scanLineEl, { left: '0%' }, { left: '100%', ease: 'none',
+  scrollTrigger: { trigger: chartWrapEl, start: 'top 85%', end: 'bottom 55%', scrub: true } });
+```
+
+**Per-card fly-in inside a horizontal-pin track** — the Horizontal pan pattern above moves the *whole* track; to also animate individual cards in as they slide into view, point GSAP's `containerAnimation` option at the pin tween so each card gets its own ScrollTrigger scrubbed by horizontal position instead of vertical scroll:
+```js
+const panTween = gsap.to(track, { x: () => -getDistance(), ease: 'none',
+  scrollTrigger: { trigger: wrapEl, start: 'top top', end: () => `+=${getDistance()}`, pin: true, scrub: 1 } });
+gsap.utils.toArray('.card').forEach((card) => {
+  gsap.fromTo(card, { autoAlpha: 0, y: 90, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1,
+    scrollTrigger: { containerAnimation: panTween.scrollTrigger.animation,
+      trigger: card, start: 'left 92%', end: 'left 55%', scrub: 0.6 } });
+});
+```
+
+---
+
 ## Brand Technique: Inline Typography Images
 
 A high-soul brand move: embed a small image or short video clip directly inside a headline as a visual punctuation mark. Removes the need for a separate image row; the image becomes part of the typographic rhythm.

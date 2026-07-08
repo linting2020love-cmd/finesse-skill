@@ -106,6 +106,16 @@ cp -r .trae-cn/skills/finesse-ui your-project/.trae-cn/skills/
 
 This is a full mirror, not a condensed rule — Trae's Skills folder convention (`.trae/skills/<name>/SKILL.md`) matches Claude Code's natively and can load every reference file on demand, so copying the whole directory gets you the same depth as Claude Code. **Maintenance note:** any change to `skills/finesse-ui/` must be copied into `.trae/skills/finesse-ui/` and `.trae-cn/skills/finesse-ui/` by hand — these are independent static copies, not symlinks, and won't update themselves.
 
+### CodeBuddy
+
+Copy the full `.codebuddy/skills/finesse-ui/` directory (SKILL.md + references + examples + scripts) into your project:
+
+```bash
+cp -r .codebuddy/skills/finesse-ui your-project/.codebuddy/skills/
+```
+
+Also a full mirror — CodeBuddy's Skills folder convention (`.codebuddy/skills/<name>/SKILL.md`) matches Claude Code's natively. **Maintenance note:** any change to `skills/finesse-ui/` must be copied into `.codebuddy/skills/finesse-ui/` by hand — this is an independent static copy, not a symlink, and won't update itself.
+
 ### Any other tool (ChatGPT / direct API / etc.)
 
 Paste the contents of `skills/finesse-ui/SKILL.md` into the system prompt or the first user message. No installation required.
