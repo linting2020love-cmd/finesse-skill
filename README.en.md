@@ -24,6 +24,8 @@ Both paths share the same foundation: **premium physical substrate + anti-slop a
    - **product** → component system + data viz (information architecture · tables · charts · forms · interaction states).
 5. **Anti-slop blacklist + pre-flight check**, then ship.
 
+> First time here? See **[USAGE.en.md](USAGE.en.md)** — a checklist for getting good results with zero design experience.
+
 ## What's inside
 
 - **Premium physical substrate** — SVG grain / vignette / type weight tension / color family (distilled from 53 pages of industry showcase analysis)
