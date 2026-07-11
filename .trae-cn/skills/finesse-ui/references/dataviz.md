@@ -127,6 +127,8 @@ Pick by **rendering approach**, not by chart name — most chart types share a l
 
 **Rule of thumb:** don't reach for D3 raw unless the chart is in the "custom / full control" bucket — for the declarative bucket it's more code for the same result, and finesse's own philosophy (craft, not needless complexity) says use the tool that gets you there with less surface area to get wrong.
 
+> **No-library path:** when the page must ship as one self-contained HTML file (no CDN chart lib) and the charts are the common declarative types at small volume, hand-build them with raw SVG + GSAP instead — see `chart-crafting.md` for the implementation recipes (coordinate normalization, draw-in, donut grow, the reduced-motion pairing). This file (decision) and `chart-crafting.md` (implementation) are complements: pick the type + a11y fallback here, build it there.
+
 ---
 
 ## 4. Color & Motion (extends `design-dna.md`)

@@ -15,6 +15,11 @@ The **product** register: design SERVES the product. Dashboards, admin panels, a
 - **Mobile bottom-nav ≤5 items**, labels always visible.
 - **First screen earns its place:** the key metrics/state should read without scrolling or interaction.
 
+**Alternative shells** (still inherit the substrate — these are container variants, not an excuse to skip §1's IA rules):
+- **Floating rounded panel:** the whole dashboard sits as one card on a tinted page background — `max-width:~1440px; margin:2rem auto; border-radius:28–32px` with a soft ambient shadow (`0 40px 90px -50px`, not a hard drop shadow). Reads as a self-contained "app" rather than a bare page; works well for consoles/ops tools where the brand wants a product-y frame around the UI.
+- **Bento console:** asymmetric `fr` columns in one grid (e.g. `2.15fr 1.7fr 1fr 1fr 1fr`) mixing a hero card (API key, primary metric) with square stat tiles — suits a console with many small heterogeneous stats where a uniform KPI row would waste space on the short ones.
+- **Top pill-nav (no sidebar):** a rounded navbar with segmented pill links replaces the sidebar when IA is shallow (≤5 top sections) and mobile parity matters more than deep nesting — collapses to icon-only or hides below the tablet breakpoint rather than drawer-izing.
+
 ## 2. Data Tables
 
 - **Alignment:** numbers/percentages/currency **right** (tabular-nums); text/dates **left**; status badges left or center. This is non-negotiable — it's how the eye scans magnitude.
@@ -69,6 +74,8 @@ Reach for standard components; never reinvent affordances. Typical inventory: **
 
 - **Modal discipline:** prefer inline or Drawer for editing; Dialog for confirmations / small forms; AlertDialog for destructive actions. Never nest modals; never a <300px dialog.
 - **Vocabulary consistency (audit before ship):** one button variant per intent (default/outline/destructive) used everywhere; one card padding; one icon size; one radius scale; semantic color tokens (`text-foreground`, `bg-muted`) never hardcoded hex; spacing only on a 4px grid.
+- **Production/scheduling timeline (Gantt-lite):** when the product is inherently calendar-driven (creative pipelines, ops schedules, launch plans), a day-ruler header + per-row bars positioned by `left`/`width` **percentage** (not px) with a live "today" marker line reads as a first-class view, not a table substitute. Connect a marker to a floating context card (a call invite, a comment thread) via a dashed line whose endpoints are computed from `getBoundingClientRect()` deltas against a shared container, recomputed on resize. This absolute-positioning approach doesn't survive a single-column mobile reflow — degrade to a static stacked card list below the shell's tablet breakpoint rather than trying to keep percentages meaningful in one column.
+- **Annotated mockup / hotspot pins:** a CSS "browser chrome + block" mockup of the product's own live preview, or a real photo the product is about (a patient/pet, a job site), gets small pill labels pinned at `top/left` **percentage** coordinates with a staggered fade-in (each ~120–150ms after the last). This is legitimate under `anti-cheap.md`'s mockup boundary only when the mock **is** the product's own feature (a CMS site-preview pane, a health-status annotation surface) — not a stand-in for a screenshot the page couldn't produce.
 
 ## 7. Cognitive Load & Usability
 

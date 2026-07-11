@@ -123,7 +123,9 @@ If any gate fails: fix it. Do not ship and note it as a known issue.
 | `skills/finesse-ui/references/anti-cheap.md` | Running the cheapness audit |
 | `skills/finesse-ui/references/audit.md` | Read-only diagnostic (cheapness + spectacle + pre-flight) |
 | `skills/finesse-ui/references/product-ui.md` | Product register: dashboards, tables, charts |
-| `skills/finesse-ui/references/dataviz.md` | Chart-heavy UI beyond the starter table: full 25-type matrix, a11y grade + fallback, library picks |
+| `skills/finesse-ui/references/dataviz.md` | Chart-heavy UI beyond the starter table: full 25-type matrix, a11y grade + fallback, library picks (the decision layer) |
+| `skills/finesse-ui/references/chart-crafting.md` | Hand-building charts in a single self-contained file — no-library SVG+GSAP recipes: coordinate normalization, line/area draw-in, donut/gauge grow, stacked bars, sparklines, reduced-motion pairing (the implementation layer) |
+| `skills/finesse-ui/references/theming.md` | Brief asks for a light/dark toggle or swappable named themes |
 | `skills/finesse-ui/references/commerce-ui.md` | Commerce register: PDP, PLP, cart, checkout, dark-pattern blacklist |
 | `skills/finesse-ui/references/asset-sourcing.md` | No real imagery on hand: generate vs. real stock vs. placeholder fallback, with the authorization step for each |
 | `skills/finesse-ui/references/preflight.md` | Pre-flight checklist |

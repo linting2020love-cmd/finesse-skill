@@ -109,6 +109,21 @@ Engine letters match `references/hero-engines.md`: **A** Three.js+GLSL · **B** 
 |------|----------|--------|----------------|
 | morph | 字形变形演示 | E | 实时字重/字宽控制（CSS variable font），排版本身即是全部内容，无 hero 引擎可言 |
 
+## Product Dashboards (Product Register — Not Persona-Mapped)
+
+These don't use `style-personas.md` (that table is brand-register only). `examples/EXAMPLES.md` bundles 2 of a 10-page dashboard batch (`acru-financial-dashboard.html`, `pawcare-adaptive-health.html`) as full files; the other 8 are catalogued here as technique notes against `references/product-ui.md` and `references/chart-crafting.md`.
+
+| Page | Industry | Shell | What to study |
+|------|----------|-------|----------------|
+| buildly-ai | AI 增长分析 | 侧边栏 + 顶栏（canonical） | SVG 双线面积图描线 + 甜甜圈流量图 + 数字滚动 KPI + 原生 thumb 滑块（slider 一档做法） |
+| stakent-staking | 基础设施监控 | 侧边栏 + 顶栏 | 发光 sparkline（feGaussianBlur 滤镜叠加描边）、自定义 knob+fill+tag 滑块（slider 二档做法） |
+| photo-studio | 摄影图库 | 侧边栏 + 顶栏（浅色） | 真实 Unsplash 图 + `onerror` 兜底 emoji/渐变占位、面积图描线 |
+| huddle-workspace | 团队协作 | 顶部胶囊导航（无侧边栏） | product-ui.md 的"无侧边栏"替代 shell 范例、甜甜圈 Sprint 进度、语音波形聊天气泡 |
+| nodeflux-console | 开发者 API 控制台 | 浮层圆角面板 + Bento | product-ui.md 的浮层面板 + Bento 替代 shell 范例、同心环成本聚类（chart-crafting.md 新增写法）、sparkline 复用函数 |
+| reelflow-production | 影视后期排期 | 浮层面板，无侧边栏 | Gantt-lite 生产排期时间轴（`product-ui.md` §6）：日期标尺 + 实时 today 标记线、每行 bar 按 `left`/`width` 百分比定位、浮层通话邀请卡通过计算出的虚线连接、旋转叠放的任务卡堆叠（移动端降级为静态列表） |
+| inkline-cms | CMS 内容平台 | 三栏定宽布局 | 浏览器 chrome mockup + 热点标注 pin（product-ui.md 新增写法的另一种载体：CSS mockup 而非真实照片） |
+| ledgerio-treasury | 客服运营台 | 浮层圆角面板 + Bento | 深色 Bento 卡 + 环形负载 gauge（可切换视图状态）、时间轴路线图、分配表格内嵌进度条 |
+
 ## Teaching Pair — Deliberate Anti-Pattern Contrast
 
 `folio.html`（Noa Hartman 作品集，克制的 bento grid，零动画但每处细节都对）和 `folio-v1.html`（同一人物同一文案的"反面版本"：默认字体、糊脸紫青渐变、全居中、塑料阴影、模板感——HTML 注释里明确写着"故意做得廉价"）是同一批语料里唯一一对**故意成对**的正/反例。审查一个"感觉很 AI"的页面时，把它和 `folio-v1` 的毛病列表对一遍，比空对着 `anti-cheap.md` 的清单更直观。
