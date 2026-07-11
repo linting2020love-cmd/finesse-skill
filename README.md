@@ -46,6 +46,13 @@
 | ![Forge — Three.js 粒子火焰，游戏工作室](assets/examples/forge.png) | ![Volt — 纯电汽车，粗体排版](assets/examples/volt.png) |
 | ![Morning Ritual — 精品咖啡，editorial 浅色主题](assets/examples/coffee.png) | ![Eclipse — 数据引力平台，粗体排版](assets/examples/eclipse.png) |
 
+product 路线（组件系统 · 数据可视化 · 信息架构）：
+
+| | |
+|:---:|:---:|
+| ![Buildly — AI 增长分析，经典侧边栏 shell + 面积图描线 + 甜甜圈](assets/examples/buildly.jpg) | ![Pulsegrid — 基础设施监控，发光 sparkline + 高级自定义滑块](assets/examples/stakent.jpg) |
+| ![ACRU — 团队效率，侧边栏经典 shell + 悬停 tooltip 柱状图](assets/examples/acru.jpg) | ![PawCare+ — 宠物健康看护，真实照片热点标注 + 主题色切换](assets/examples/pawcare.jpg) |
+
 ## 安装 & 工具支持
 
 ### npx skills（推荐 · 一条命令通用于 Claude Code / Codex / Cursor 等）

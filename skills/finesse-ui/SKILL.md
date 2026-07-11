@@ -42,7 +42,8 @@ The `references/*.md` files are the deep material. Load the one you need for the
 | `inspiration-catalog.md` | Persona picked but you want a wider menu of proven techniques for that soul, or the brief doesn't fit any of the 10 personas cleanly |
 | `anti-cheap.md` | Before any delivery — cheapness scan |
 | `product-ui.md` | Dashboard / admin / data app (product register) |
-| `dataviz.md` | Chart-heavy product UI beyond the starter table — full 25-type selection matrix, a11y grade + mandatory fallback, library picks |
+| `dataviz.md` | Chart-heavy product UI beyond the starter table — full 25-type selection matrix, a11y grade + mandatory fallback, library picks (the **decision** layer) |
+| `chart-crafting.md` | Building charts by hand in a single self-contained file — the no-library **implementation** layer: SVG coordinate normalization, line/area draw-in, donut/gauge grow, stacked bars, sparklines, the three animations × reduced-motion pairing, slider-driven live update |
 | `commerce-ui.md` | Product detail page (PDP), listing/category page (PLP), cart, checkout — commerce register |
 | `asset-sourcing.md` | Brief implies real imagery but no assets provided — generate vs. real stock vs. placeholder fallback, with the authorization step for each |
 | `preflight.md` | Final checklist before saying "done" |
@@ -269,7 +270,8 @@ Before declaring done, scan against `references/anti-cheap.md` — the merged an
 ## 7. PERFORMANCE & ACCESSIBILITY GUARDRAILS
 
 - Animate `transform`/`opacity` only; never `top/left/width/height`. `will-change` sparingly.
-- `prefers-reduced-motion`: stop canvas loops, freeze grain, swap to static. Mandatory on every animated page.
+- `prefers-reduced-motion`: stop canvas loops, freeze grain, swap to static. **Mandatory on every animated page — no exceptions, decorative motion included.** A page that animates without a reduced-motion terminal state is shipping broken.
+  - **Capability-probe pattern (the ship-ready shape):** read the probes once at the top — `const RM = matchMedia('(prefers-reduced-motion:reduce)').matches; const FINE = matchMedia('(hover:hover) and (pointer:fine)').matches;` — then branch **per effect**: `if (RM) <set final state> else <animate>`. Gate pointer-dependent motion (magnetic buttons, cursor followers, hover accordions) behind `FINE` so it never fires on touch. Pair with the CSS backstop `@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}`. Every hand-built chart draw-in ships its terminal state the same way (`chart-crafting.md` §6).
 - Color contrast WCAG AA: body ≥ 4.5:1, large text ≥ 3:1. Includes buttons over photos (add scrim/stroke), placeholders, focus rings.
 - Visible focus states on every interactive element. Nav and CTAs reachable by keyboard.
 - Core Web Vitals: lazy-load heavy engines, `min-h-dvh` over `100vh` on mobile, responsive images (WebP/AVIF), CLS < 0.1.

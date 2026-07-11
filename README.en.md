@@ -46,6 +46,13 @@ Pages built from the same design DNA — brand path (visual engines · soul-driv
 | ![Forge — Three.js particle fire, game studio](assets/examples/forge.png) | ![Volt — all-electric car, bold typographic hero](assets/examples/volt.png) |
 | ![Morning Ritual — specialty coffee, editorial light theme](assets/examples/coffee.png) | ![Eclipse — data gravity platform, bold typographic](assets/examples/eclipse.png) |
 
+Product register (component system · data viz · information architecture):
+
+| | |
+|:---:|:---:|
+| ![Buildly — AI growth intelligence, canonical sidebar shell + area-chart draw-in + donut](assets/examples/buildly.jpg) | ![Pulsegrid — infrastructure monitoring, glowing sparklines + premium custom slider](assets/examples/stakent.jpg) |
+| ![ACRU — team productivity, canonical sidebar shell + hover-tooltip bar chart](assets/examples/acru.jpg) | ![PawCare+ — pet health companion, real-photo hotspot annotations + theme switcher](assets/examples/pawcare.jpg) |
+
 ## Installation & Tool Support
 
 ### npx skills (recommended · one command for Claude Code / Codex / Cursor, etc.)
